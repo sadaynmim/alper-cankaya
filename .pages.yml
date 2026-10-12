@@ -69,7 +69,7 @@ content:
     fields:
       - name: src
         label: Adresse de la photo
-        type: string
+        type: image
         required: true
       - name: credit
         label: Crédit photo

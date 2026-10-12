@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 const dir='dist'; fs.rmSync(dir,{recursive:true,force:true}); fs.mkdirSync(dir,{recursive:true});
 fs.copyFileSync('src/index.html',path.join(dir,'index.html'));
-fs.cpSync('media',path.join(dir,'media'),{recursive:true});
+if(fs.existsSync('media')) fs.cpSync('media',path.join(dir,'media'),{recursive:true});
 const items=(name)=>fs.readdirSync('content/'+name).filter(x=>x.endsWith('.json')).sort().map(x=>JSON.parse(fs.readFileSync('content/'+name+'/'+x,'utf8')));
 const works=items('works').map(w=>({...w,description:{tr:w.description_tr||'',en:w.description_en||'',ar:w.description_ar||'',fr:w.description_fr||''}}));
 const gallery=items('gallery');

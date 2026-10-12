@@ -1,0 +1,95 @@
+
+media:
+  input: media
+  output: /media
+
+content:
+  - name: biography
+    label: Biographie
+    type: file
+    path: content/bio.json
+    format: json
+    fields:
+      - name: p1_fr
+        label: Paragraphe 1 — Français
+        type: text
+      - name: p2_fr
+        label: Paragraphe 2 — Français
+        type: text
+
+  - name: filmography
+    label: Filmographie
+    type: collection
+    path: content/works
+    format: json
+    filename: "{primary}.json"
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: year
+        label: Année
+        type: string
+      - name: role
+        label: Personnage
+        type: string
+      - name: kind
+        label: Type de production
+        type: select
+        options:
+          - name: series
+            label: Série
+          - name: film
+            label: Film
+          - name: theatre
+            label: Théâtre
+      - name: tone
+        label: Style visuel
+        type: string
+      - name: description_tr
+        label: Description — Turc
+        type: text
+      - name: description_en
+        label: Description — Anglais
+        type: text
+      - name: description_fr
+        label: Description — Français
+        type: text
+      - name: description_ar
+        label: Description — Arabe
+        type: text
+
+  - name: gallery
+    label: Galerie photos
+    type: collection
+    path: content/gallery
+    format: json
+    filename: "{primary}.json"
+    fields:
+      - name: src
+        label: Adresse de la photo
+        type: string
+        required: true
+      - name: credit
+        label: Crédit photo
+        type: string
+      - name: url
+        label: Lien vers la source
+        type: string
+      - name: cat
+        label: Catégorie
+        type: number
+
+  - name: news
+    label: Actualités
+    type: file
+    path: content/news.json
+    format: json
+    fields:
+      - name: title_fr
+        label: Titre — Français
+        type: string
+      - name: description_fr
+        label: Description — Français
+        type: text

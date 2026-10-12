@@ -83,13 +83,48 @@ content:
 
   - name: news
     label: Actualités
-    type: file
-    path: content/news.json
+    type: collection
+    path: content/news
     format: json
+    filename: "{primary}.json"
     fields:
       - name: title_fr
         label: Titre — Français
         type: string
+        required: true
+      - name: date
+        label: Date de publication
+        type: date
+        required: true
+      - name: image
+        label: Photo de l'article
+        type: image
+      - name: source
+        label: Nom de la source
+        type: string
+      - name: url
+        label: Lien vers la source
+        type: string
       - name: description_fr
-        label: Description — Français
+        label: Texte — Français
         type: text
+      - name: title_tr
+        label: Titre — Turc
+        type: string
+      - name: description_tr
+        label: Texte — Turc
+        type: text
+      - name: title_en
+        label: Titre — Anglais
+        type: string
+      - name: description_en
+        label: Texte — Anglais
+        type: text
+      - name: title_ar
+        label: Titre — Arabe
+        type: string
+      - name: description_ar
+        label: Texte — Arabe
+        type: text
+
+ 

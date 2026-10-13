@@ -1,0 +1,36 @@
+name: Auto-translate English content to Turkish
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/translate-to-turkish.yml"
+      - "content/bio.json"
+      - "content/news.json"
+      - "content/news/**"
+      - "content/works/**"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Translate English text
+        env:
+          GOOGLE_CLOUD_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_CLOUD_TRANSLATE_API_KEY }}
+        run: node scripts/generate-translations.mjs
+      - name: Store Turkish translations
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/translations.tr.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh Turkish translations"
+            git push
+          fi

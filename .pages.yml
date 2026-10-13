@@ -1,128 +1,103 @@
-
 media:
   input: media
   output: /media
 
 content:
   - name: biography
-    label: Biographie
+    label: Biography
     type: file
     path: content/bio.json
     format: json
     fields:
-      - name: p1_fr
-        label: Paragraphe 1 — Français
+      - name: p1_en
+        label: Paragraph 1 — English
         type: text
-      - name: p2_fr
-        label: Paragraphe 2 — Français
+      - name: p2_en
+        label: Paragraph 2 — English
         type: text
 
   - name: filmography
-    label: Filmographie
+    label: Filmography
     type: collection
     path: content/works
     format: json
     filename: "{primary}.json"
     fields:
       - name: title
-        label: Titre
+        label: Title
         type: string
         required: true
       - name: year
-        label: Année
+        label: Year
         type: string
       - name: role
-        label: Personnage
+        label: Character
         type: string
       - name: kind
-        label: Type de production
+        label: Production type
         type: select
         options:
           - name: series
-            label: Série
+            label: TV series
           - name: film
             label: Film
           - name: theatre
-            label: Théâtre
+            label: Theatre
       - name: tone
-        label: Style visuel
+        label: Visual tone
         type: string
-      - name: description_tr
-        label: Description — Turc
-        type: text
+      - name: character_image
+        label: Character photo
+        type: image
       - name: description_en
-        label: Description — Anglais
-        type: text
-      - name: description_fr
-        label: Description — Français
-        type: text
-      - name: description_ar
-        label: Description — Arabe
+        label: Character description — English
         type: text
 
   - name: gallery
-    label: Galerie photos
+    label: Photo Gallery
     type: collection
     path: content/gallery
     format: json
     filename: "{primary}.json"
     fields:
       - name: src
-        label: Adresse de la photo
+        label: Photo
         type: image
         required: true
       - name: credit
-        label: Crédit photo
+        label: Photo credit
         type: string
       - name: url
-        label: Lien vers la source
+        label: Source link
         type: string
       - name: cat
-        label: Catégorie
+        label: Category
         type: number
 
   - name: news
-    label: Actualités
+    label: News
     type: collection
     path: content/news
     format: json
     filename: "{primary}.json"
     fields:
-      - name: title_fr
-        label: Titre — Français
+      - name: title_en
+        label: Headline — English
         type: string
         required: true
       - name: date
-        label: Date de publication
+        label: Publication date
         type: date
         required: true
       - name: image
-        label: Photo de l'article
+        label: Article image
         type: image
       - name: source
-        label: Nom de la source
+        label: Source name
         type: string
       - name: url
-        label: Lien vers la source
-        type: string
-      - name: description_fr
-        label: Texte — Français
-        type: text
-      - name: title_tr
-        label: Titre — Turc
-        type: string
-      - name: description_tr
-        label: Texte — Turc
-        type: text
-      - name: title_en
-        label: Titre — Anglais
+        label: Source link
         type: string
       - name: description_en
-        label: Texte — Anglais
-        type: text
-      - name: title_ar
-        label: Titre — Arabe
-        type: string
-      - name: description_ar
-        label: Texte — Arabe
+        label: Article — English
         type: text

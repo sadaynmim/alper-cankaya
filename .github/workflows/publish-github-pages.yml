@@ -25,3 +25,18 @@ jobs:
           publish_branch: gh-pages
           force_orphan: true
           enable_jekyll: false
+      - name: Check public GitHub Pages URL
+        shell: bash
+        run: |
+          SITE="https://sadaynmim.github.io/alper-cankaya"
+          for attempt in 1 2 3; do
+            HTTP=$(curl -sSL --connect-timeout 6 --max-time 15 -o /tmp/pages-index.html -w '%{http_code}' "$SITE/" || true)
+            PHOTO=$(curl -sSL --connect-timeout 6 --max-time 15 -o /tmp/pages-photo.jpg -w '%{http_code}' "$SITE/media/sober-portrait-2026.jpg" || true)
+            echo "Attempt $attempt: homepage HTTP=$HTTP, portrait HTTP=$PHOTO"
+            if [ "$HTTP" = "200" ] && [ "$PHOTO" = "200" ] && grep -q 'media/sober-portrait-2026.jpg' /tmp/pages-index.html; then
+              echo "PUBLIC_SITE_READY: original Sober portrait referenced by homepage."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "PAGES_NOT_PUBLIC: enable Settings > Pages > Deploy from a branch > gh-pages > / (root)."

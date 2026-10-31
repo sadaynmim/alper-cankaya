@@ -84,6 +84,12 @@ content:
       - name: character_image
         label: Character photo
         type: image
+      - name: character_image_credit
+        label: Character photo credit
+        type: string
+      - name: character_image_source
+        label: Character photo source (URL)
+        type: string
       - name: description_en
         label: Character description — English
         type: text

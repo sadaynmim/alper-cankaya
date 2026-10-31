@@ -1,0 +1,35 @@
+name: Inspect requested IMDb still for Bedri
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/inspect-imdb-bedri.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Resolve exact IMDb still
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,html,json
+          urls=[
+          'https://www.imdb.com/title/tt21764804/mediaviewer/rm1517111297/',
+          'https://www.imdb.com/fr/title/tt21764804/mediaviewer/rm1517111297/'
+          ]
+          for u in urls:
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36','Accept-Language':'en-US,en;q=0.9'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                txt=r.read().decode('utf-8','replace')
+                print('PAGE',r.status,'LENGTH',len(txt),'URL',r.url)
+                for pattern in [r'<meta[^>]+property="og:image"[^>]+content="([^"]+)"',r'<meta[^>]+content="([^"]+)"[^>]+property="og:image"',r'"image":\s*"([^"]+)"',r'https://m.media-amazon.com/images/M/[^" ]+']:
+                  matches=re.findall(pattern,txt)
+                  print('MATCH',pattern[:25],len(matches),[html.unescape(x)[:500] for x in matches[:3]])
+                for q in ['rm1517111297','Alper','Bedri']:
+                  i=txt.find(q);print('FOUND',q,i,txt[max(0,i-120):i+160] if i>=0 else '')
+            except Exception as e:print('ERROR',type(e).__name__,str(e)[:500])
+          PY

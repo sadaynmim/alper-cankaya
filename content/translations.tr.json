@@ -1,4 +1,61 @@
 {
   "version": 1,
-  "entries": {}
+  "entries": {
+    "content/bio.json:p1_en": {
+      "source": "Born in Tekirdağ on March 7, 1990, Alper Çankaya built his career across theatre, television and film, bringing distinct characters to life.",
+      "translation": "7 Mart 1990'da Tekirdağ'da doğdu, Alper Çankaya tiyatro, televizyon ve film boyunca kariyerini inşa etti, hayata farklı karakterler getirdi."
+    },
+    "content/bio.json:p2_en": {
+      "source": "He graduated from Bilkent University’s Theatre Department in 2017 and trained at the Shanghai Theatre Academy in 2016. His career spans stage performances and screen roles.",
+      "translation": "2017 yılında Bilkent Üniversitesi Tiyatro Bölümünden mezun oldu ve 2016 yılında Shanghai Theatre Academy'nde eğitim aldı. Kariyeri sahne performansları ve ekran rolleri yaymaktadır."
+    },
+    "content/news.json:title_en": {
+      "source": "A new arrival on Sevdiğim Sensin: Ali Cabbar.",
+      "translation": "Candym Sensin'e yeni bir varış: Ali Cabbar."
+    },
+    "content/news.json:description_en": {
+      "source": "On September 9, 2026, Star TV announced Alper Çankaya’s arrival as Ali Cabbar in the series.",
+      "translation": "9 Eylül 2026'da Star TV, Alper Çankaya'nın serideki Ali Cabbar olarak gelişini duyurdu."
+    },
+    "content/works/01.json:description_en": {
+      "source": "Ali Cabbar in the Star TV drama series.",
+      "translation": "Yıldız TV drama serisinde Ali Cabbar."
+    },
+    "content/works/02.json:description_en": {
+      "source": "His television role as Şahin Albora.",
+      "translation": "Televizyon rolü Şahin Albora olarak."
+    },
+    "content/works/03.json:description_en": {
+      "source": "His performance as Enver Baltacı.",
+      "translation": "Enver Baltacı olarak performansı."
+    },
+    "content/works/04.json:description_en": {
+      "source": "His role as Bedri.",
+      "translation": "Bedri olarak rolü."
+    },
+    "content/works/05.json:description_en": {
+      "source": "Ömer in the feature film Glass Curtain.",
+      "translation": "Özel filmde Ömer Cam Perde."
+    },
+    "content/works/06.json:description_en": {
+      "source": "Ahmet Kalkan in the television drama.",
+      "translation": "Ahmet Kalkan televizyon dramasında."
+    },
+    "content/works/07.json:description_en": {
+      "source": "A television appearance as Eyüp Böceli.",
+      "translation": "Eyüp Böceli olarak televizyon görünümü."
+    },
+    "content/works/08.json:description_en": {
+      "source": "An early television role as Arslan.",
+      "translation": "Arslan olarak erken bir televizyon rolü."
+    },
+    "content/news/alper-cankaya-invite-dapa-talks-le-24-octobre.json:title_en": {
+      "source": "Alper Çankaya to join APA Talks on October 24",
+      "translation": "24 Ekim'de APA Talks'a katılmak için Alper Çankaya"
+    },
+    "content/news/alper-cankaya-invite-dapa-talks-le-24-octobre.json:description_en": {
+      "source": "Alper Çankaya will be a guest at APA Talks on Saturday, October 24, 2026, at 6:00 PM, at Ekşi On Altı Mekan.\n\nModerated by Sercan Özinan, the conversation will explore Çankaya’s experience in theatre, film and television, the differences between stage and screen acting, and his perspective on the craft.\n\nThe event is free, but all available places have been reserved.",
+      "translation": "Alper Çankaya Cumartesi günü APA Talks'ta bir misafir olacak, 24 Ekim 2026, 6:00 PM, Ekşi On Altı Mekanda.\n\nSercan Özinan’a göre konuşma, Çankaya’nın tiyatro, film ve televizyondaki deneyimlerini, sahne ve ekran oyunculuk arasındaki farkları ve zanaat üzerindeki bakış açısını keşfedecektir.\n\nOlay ücretsizdir, ancak mevcut tüm yerler saklıdır."
+    }
+  }
 }

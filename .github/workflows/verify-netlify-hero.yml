@@ -20,6 +20,7 @@ jobs:
             echo "Attempt $attempt"
             CODE=$(curl -L -sS --connect-timeout 5 --max-time 12 -o /tmp/hero-home.html -w '%{http_code}' "$SITE/" || true)
             echo "Homepage HTTP: $CODE"
+            if [ "$CODE" != "200" ] && [ -f /tmp/hero-home.html ]; then head -c 900 /tmp/hero-home.html; echo; fi
             if [ -f /tmp/hero-home.html ]; then
               grep -oE 'sober-portrait-2026.jpg|ankaramasasi' /tmp/hero-home.html | sort -u || true
             fi

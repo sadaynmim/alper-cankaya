@@ -1,0 +1,52 @@
+name: Import selected original Sober portrait
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-sober-portrait.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-photo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download original user-selected portrait
+        env:
+          PHOTO_URL: "https://d2ol7oe51mr4n9.cloudfront.net/user_3Bp09HCYijize1fZ8oev6ZYKGUk/e8fa4133-d879-4df7-a033-f61b52ee9b25.jpg"
+        run: |
+          mkdir -p media
+          curl -fLSs --retry 3 --connect-timeout 15 --max-time 90 "$PHOTO_URL" -o media/sober-portrait-2026.jpg
+          echo "1ec019fe07a78fe82452c389fbab60a55315b2be1f2c1f4a9caa5c720c0520f7  media/sober-portrait-2026.jpg" | sha256sum --check --status
+          file media/sober-portrait-2026.jpg
+      - name: Switch site to self-hosted original image
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          remote = "https://d2ol7oe51mr4n9.cloudfront.net/user_3Bp09HCYijize1fZ8oev6ZYKGUk/e8fa4133-d879-4df7-a033-f61b52ee9b25.jpg"
+          local = "/media/sober-portrait-2026.jpg"
+          path = Path("content/site.json")
+          cfg = json.loads(path.read_text())
+          cfg["hero_image"] = local
+          cfg["hero_focus"] = "25%"
+          cfg["hero_credit"] = "Sober"
+          cfg["hero_credit_url"] = ""
+          path.write_text(json.dumps(cfg, ensure_ascii=False, indent=2) + "\n")
+          html_path = Path("src/index.html")
+          html = html_path.read_text()
+          assert remote in html, "Expected portrait URL not found in fallback"
+          html_path.write_text(html.replace(remote, local))
+          PY
+      - name: Commit original image and site configuration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media/sober-portrait-2026.jpg content/site.json src/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "media: self-host original Sober black-and-white portrait"
+            git pull --rebase origin main
+            git push
+          fi

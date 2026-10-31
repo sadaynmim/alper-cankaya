@@ -8,26 +8,32 @@ on:
 jobs:
   check-live:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 3
     steps:
-      - name: Verify deployed HTML and exact original photo
+      - name: Inspect live homepage and portrait
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
           SITE="https://stirring-biscuit-3e7c39.netlify.app"
           EXPECTED="1ec019fe07a78fe82452c389fbab60a55315b2be1f2c1f4a9caa5c720c0520f7"
-          for attempt in $(seq 1 20); do
-            echo "Live verification attempt $attempt"
-            if curl -fsSL --connect-timeout 15 --max-time 40 "$SITE/" -o /tmp/hero-home.html &&
-               grep -q '/media/sober-portrait-2026.jpg' /tmp/hero-home.html &&
-               curl -fsSL --connect-timeout 15 --max-time 40 "$SITE/media/sober-portrait-2026.jpg" -o /tmp/hero-photo.jpg &&
-               echo "$EXPECTED  /tmp/hero-photo.jpg" | sha256sum -c --status; then
-              echo "SUCCESS: Netlify serves the new homepage HTML and the exact original Sober photo."
-              echo "Image bytes: $(wc -c </tmp/hero-photo.jpg)"
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt"
+            CODE=$(curl -L -sS --connect-timeout 5 --max-time 12 -o /tmp/hero-home.html -w '%{http_code}' "$SITE/" || true)
+            echo "Homepage HTTP: $CODE"
+            if [ -f /tmp/hero-home.html ]; then
+              grep -oE 'sober-portrait-2026.jpg|ankaramasasi' /tmp/hero-home.html | sort -u || true
+            fi
+            PHOTO_CODE=$(curl -L -sS --connect-timeout 5 --max-time 12 -o /tmp/hero-photo.jpg -w '%{http_code}' "$SITE/media/sober-portrait-2026.jpg" || true)
+            echo "Photo HTTP: $PHOTO_CODE"
+            if [ -f /tmp/hero-photo.jpg ]; then
+              echo "Photo bytes: $(wc -c </tmp/hero-photo.jpg)"
+              echo "Photo SHA256: $(sha256sum /tmp/hero-photo.jpg | cut -d' ' -f1)"
+            fi
+            if [ "$CODE" = 200 ] && grep -q '/media/sober-portrait-2026.jpg' /tmp/hero-home.html && [ "$PHOTO_CODE" = 200 ] && echo "$EXPECTED  /tmp/hero-photo.jpg" | sha256sum --check --status; then
+              echo "SUCCESS: live site serves correct HTML and exact user-uploaded Sober portrait."
               exit 0
             fi
-            echo "Not yet matching; waiting for deployment"
-            sleep 15
+            sleep 5
           done
-          echo "FAIL: Live Netlify HTML or portrait did not match the repository."
+          echo "FAIL: Netlify live site has not deployed this image correctly."
           exit 1

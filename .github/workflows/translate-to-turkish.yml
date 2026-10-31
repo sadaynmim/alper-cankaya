@@ -1,9 +1,10 @@
-name: Auto-translate English content to Turkish
+name: Translate English to Turkish (free, offline)
 on:
   push:
     branches: [main]
     paths:
       - ".github/workflows/translate-to-turkish.yml"
+      - "scripts/generate-translations.py"
       - "content/bio.json"
       - "content/news.json"
       - "content/news/**"
@@ -11,26 +12,34 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: offline-translations-main
+  cancel-in-progress: false
 jobs:
   translate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: '22'
-      - name: Translate English text
+          python-version: '3.11'
+      - name: Install free offline translation engine
+        run: python -m pip install 'argostranslate==1.11.0'
+      - name: Generate Turkish translations without paid APIs
         env:
-          GOOGLE_CLOUD_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_CLOUD_TRANSLATE_API_KEY }}
-        run: node scripts/generate-translations.mjs
-      - name: Store Turkish translations
+          ARGOS_DEVICE_TYPE: cpu
+          ARGOS_CHUNK_TYPE: SPACY
+        run: python scripts/generate-translations.py
+      - name: Publish cached translations
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/translations.tr.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: refresh Turkish translations"
+            git commit -m "chore: refresh Turkish translations (offline)"
+            git pull --rebase origin main
             git push
           fi

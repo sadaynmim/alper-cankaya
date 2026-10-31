@@ -1,13 +1,25 @@
 # Alper Çankaya — The Archive
 
-Site fan indépendant. Pages CMS : anglais uniquement. Visiteurs : anglais et turc.
+Independent, unofficial fan archive. The editor uses English only in [Pages CMS](https://app.pagescms.org); site visitors can select English or Turkish.
 
-La biographie, les actualités et les descriptions de filmographie sont rédigées une seule fois en anglais dans Pages CMS. Les photos des personnages peuvent être ajoutées dans la filmographie.
+## Free English → Turkish translations
 
-Traduction turque automatique : GitHub Actions génère les traductions des textes nouveaux ou modifiés, les enregistre dans content/translations.tr.json puis déclenche le déploiement Netlify habituel.
+The `.github/workflows/translate-to-turkish.yml` workflow uses **Argos Translate** (open source) on the standard GitHub Actions runner for this public repository, with no paid API and no billing account.
 
-À configurer une fois : activer Cloud Translation API (Basic/v2) et la facturation dans Google Cloud, créer une clé limitée à cette API, puis enregistrer celle-ci dans GitHub > Settings > Secrets and variables > Actions, sous le nom GOOGLE_CLOUD_TRANSLATE_API_KEY. Ne jamais l'ajouter au dépôt ni à un message. Lancer ensuite Actions > Auto-translate English content to Turkish > Run workflow.
+- Edit the English texts in `content/bio.json`, `content/works/*.json` and `content/news/*.json` using Pages CMS.
+- The action installs the free offline English → Turkish model when new or modified texts need translation.
+- `scripts/generate-translations.py` writes the translated texts to `content/translations.tr.json`.
+- An automatic commit triggers the site's normal Netlify deployment.
+- Unchanged content is read from the translation cache. Existing manually entered Turkish text remains available as a fallback until it has a cached translation.
+- Open GitHub → Actions → **Translate English to Turkish (free, offline)** to check the latest translation run or start it manually.
 
-Avant la configuration de la clé, les textes turcs existants restent visibles. Les nouveaux textes peuvent s'afficher en anglais dans la version turque jusqu'à l'activation.
+Translation quality is machine-generated, so review important names and quotations. There is no Google Cloud Translation API requirement, subscription, or secret.
 
-Build Netlify : npm run build, dossier dist. Le site est indépendant de l'acteur et de ses représentants.
+## Other website content
+
+- Filmography has a **Character photo** field for each role.
+- Gallery supports photo credit and source links.
+- The display design, layout and Netlify build setup are unchanged.
+- Build: `npm run build`, publish directory: `dist`.
+
+This independent fan site is not affiliated with the actor or his representatives.

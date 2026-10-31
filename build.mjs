@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 const out='dist'; fs.rmSync(out,{recursive:true,force:true}); fs.mkdirSync(out,{recursive:true});
 fs.copyFileSync('src/index.html',path.join(out,'index.html'));
 if(fs.existsSync('media')) fs.cpSync('media',path.join(out,'media'),{recursive:true});
@@ -8,6 +9,7 @@ const gaddarSource='media/gaddar-enver.webp.b64';
 if(fs.existsSync(gaddarSource)){
   const photo=Buffer.from(fs.readFileSync(gaddarSource,'utf8').trim(),'base64');
   if(photo.length<1000||photo.toString('ascii',0,4)!=='RIFF'||photo.toString('ascii',8,12)!=='WEBP') throw new Error('Invalid Gaddar portrait');
+  if(crypto.createHash('sha256').update(photo).digest('hex')!=='1e80771801211917f9261ffb7750165f33249076d73466b8818bebcb304a983d') throw new Error('Gaddar portrait integrity check failed');
   fs.writeFileSync(path.join(out,'media','gaddar-enver.webp'),photo);
 }
 

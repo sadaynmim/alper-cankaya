@@ -3,6 +3,41 @@ media:
   output: /media
 
 content:
+  - name: appearance
+    label: Home page image
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: hero_image
+        label: Homepage portrait (black and white)
+        type: image
+        required: true
+      - name: hero_focus
+        label: Portrait crop / vertical focus
+        type: select
+        options:
+          - name: "15%"
+            label: High
+          - name: "25%"
+            label: Upper
+          - name: "35%"
+            label: Slightly above center
+          - name: "45%"
+            label: Center
+          - name: "50%"
+            label: Slightly below center
+          - name: "60%"
+            label: Low
+          - name: "70%"
+            label: Very low
+      - name: hero_credit
+        label: Photo credit
+        type: string
+      - name: hero_credit_url
+        label: Original photo source (URL)
+        type: string
+
   - name: biography
     label: Biography
     type: file

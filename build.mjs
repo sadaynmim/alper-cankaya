@@ -16,9 +16,10 @@ function tr(file,field,en,legacy=''){
 const works=entries('works').map(({path:file,data:w})=>{const en=w.description_en||w.description?.en||'';return {...w,description:{en,tr:tr(file,'description_en',en,w.description_tr||w.description?.tr||'')}}});
 const gallery=entries('gallery').map(v=>v.data);
 const bio=read('content/bio.json',{});
+const site=read('content/site.json',{});
 for(const p of ['p1','p2']){const en=bio[p+'_en']||'';bio[p+'_tr']=tr('content/bio.json',p+'_en',en,bio[p+'_tr']||'');}
 const news=entries('news').map(({path:file,data:n})=>{for(const p of ['title','description']){const en=n[p+'_en']||'';n[p+'_tr']=tr(file,p+'_en',en,n[p+'_tr']||'');}return n;});
 const legacyNews=read('content/news.json',{});
 for(const p of ['title','description']){const en=legacyNews[p+'_en']||'';legacyNews[p+'_tr']=tr('content/news.json',p+'_en',en,legacyNews[p+'_tr']||'');}
-fs.writeFileSync(path.join(out,'archive-content.js'),'window.ARCHIVE_CONTENT='+JSON.stringify({works,gallery,bio,news,legacyNews}).replace(/</g,'\\u003c')+';');
+fs.writeFileSync(path.join(out,'archive-content.js'),'window.ARCHIVE_CONTENT='+JSON.stringify({works,gallery,bio,news,legacyNews,site}).replace(/</g,'\\u003c')+';');
 console.log('Built '+works.length+' works, '+gallery.length+' photos, '+news.length+' articles. EN source / TR cache.');

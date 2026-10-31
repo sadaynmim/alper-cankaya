@@ -1,0 +1,27 @@
+name: Validate site build
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "build.mjs"
+      - "scripts/check-site.mjs"
+      - ".pages.yml"
+      - "content/**"
+      - ".github/workflows/check-site.yml"
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build website
+        run: npm run build
+      - name: Validate JavaScript, content and languages
+        run: node scripts/check-site.mjs

@@ -1,0 +1,32 @@
+name: Verify public GitHub Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-public-pages.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify published homepage and exact Sober portrait
+        shell: bash
+        run: |
+          set -euo pipefail
+          SITE="https://sadaynmim.github.io/alper-cankaya"
+          EXPECTED="1ec019fe07a78fe82452c389fbab60a55315b2be1f2c1f4a9caa5c720c0520f7"
+          for attempt in $(seq 1 8); do
+            HOME_CODE=$(curl -sSL --connect-timeout 7 --max-time 15 -o /tmp/index.html -w '%{http_code}' "$SITE/" || true)
+            IMG_CODE=$(curl -sSL --connect-timeout 7 --max-time 15 -o /tmp/hero.jpg -w '%{http_code}' "$SITE/media/sober-portrait-2026.jpg" || true)
+            echo "Attempt $attempt: homepage=$HOME_CODE image=$IMG_CODE"
+            if [ "$HOME_CODE" = 200 ] && [ "$IMG_CODE" = 200 ] && grep -q 'src="media/sober-portrait-2026.jpg"' /tmp/index.html && echo "$EXPECTED  /tmp/hero.jpg" | sha256sum -c --status; then
+              echo "VERIFIED: Public site HTTP 200 and exact original Sober image delivered."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "FAILED: Public homepage and image are not both accessible and correct."
+          exit 1

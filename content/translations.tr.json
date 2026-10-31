@@ -61,6 +61,10 @@
       "translation": "Arslan karakteri.",
       "origin": "reviewed-existing"
     },
+    "content/works/09.json:description_en": {
+      "source": "Upcoming television series, currently listed as in production. Role: Şahin.",
+      "translation": "Upcoming TV serisi, şu anda üretim olarak listelendi. Rol: Şahin."
+    },
     "content/news/alper-cankaya-invite-dapa-talks-le-24-octobre.json:title_en": {
       "source": "Alper Çankaya to join APA Talks on October 24",
       "translation": "Alper Çankaya, 24 Ekim’de APA Talks’a konuk oluyor",
@@ -71,9 +75,29 @@
       "translation": "Alper Çankaya, 24 Ekim 2026 Cumartesi günü saat 18.00’de Ekşi On Altı Mekan’da düzenlenecek APA Talks’un “Oyunculuk” başlıklı buluşmasına konuk olacak.\n\nSercan Özinan’ın moderatörlüğünde gerçekleşecek söyleşide Çankaya, tiyatro, sinema ve televizyon deneyimlerini, sahne ve kamera önü oyunculuğu arasındaki farkları ve oyunculuğa bakış açısını paylaşacak.\n\nÜcretsiz etkinliğin kontenjanı dolmuş durumda.",
       "origin": "reviewed-existing"
     },
-    "content/works/09.json:description_en": {
-      "source": "Upcoming television series, currently listed as in production. Role: Şahin.",
-      "translation": "Upcoming TV serisi, şu anda üretim olarak listelendi. Rol: Şahin."
+    "content/works/10.json:description_en": {
+      "source": "İhsan in the Turkish miniseries Nemlizade (2024).",
+      "translation": "Türk mini dizi Nemlizade (2024)."
+    },
+    "content/works/11.json:description_en": {
+      "source": "Assistant Commissioner in the Netflix series Who Were We Running From? (2023).",
+      "translation": "Netflix serisindeki yardımcı komisyonu kimden koşuyoruz? (2023)."
+    },
+    "content/works/12.json:description_en": {
+      "source": "A guest appearance in the 2021 series Ex Aşkım. The character name Sefa is listed by Turkish biographical sources.",
+      "translation": "2021 serisi Ex Lovem'da misafir görünümü. Karakter adı Sefa Türkçe biyografik kaynaklar tarafından listeleniyor."
+    },
+    "content/works/13.json:description_en": {
+      "source": "Sefa in three episodes of the television drama Çukur (2020).",
+      "translation": "Televizyon drama Çukurunun üç bölümünde (2020)."
+    },
+    "content/works/14.json:description_en": {
+      "source": "Credited as Cihat in the 2019 feature film, internationally titled I Was, I Am, I Will Be. IMDb marks this as credit only.",
+      "translation": "2019'da Cihat olarak kredilendim, uluslararası olarak bendim, olacağım. Xiaomi bunu sadece kredi olarak işaret ediyor."
+    },
+    "content/works/15.json:description_en": {
+      "source": "Korhan in the 2019 Turkish feature film Soluk (Breath), documented in Turkish filmography sources.",
+      "translation": "2019'da Korhan Soluk (Breath), Türk filmografi kaynaklarında belgelendi."
     }
   }
 }

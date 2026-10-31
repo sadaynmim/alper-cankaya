@@ -1,0 +1,33 @@
+name: Verify live Netlify homepage portrait
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-netlify-hero.yml"
+  workflow_dispatch:
+jobs:
+  check-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Verify deployed HTML and exact original photo
+        shell: bash
+        run: |
+          set -euo pipefail
+          SITE="https://stirring-biscuit-3e7c39.netlify.app"
+          EXPECTED="1ec019fe07a78fe82452c389fbab60a55315b2be1f2c1f4a9caa5c720c0520f7"
+          for attempt in $(seq 1 20); do
+            echo "Live verification attempt $attempt"
+            if curl -fsSL --connect-timeout 15 --max-time 40 "$SITE/" -o /tmp/hero-home.html &&
+               grep -q '/media/sober-portrait-2026.jpg' /tmp/hero-home.html &&
+               curl -fsSL --connect-timeout 15 --max-time 40 "$SITE/media/sober-portrait-2026.jpg" -o /tmp/hero-photo.jpg &&
+               echo "$EXPECTED  /tmp/hero-photo.jpg" | sha256sum -c --status; then
+              echo "SUCCESS: Netlify serves the new homepage HTML and the exact original Sober photo."
+              echo "Image bytes: $(wc -c </tmp/hero-photo.jpg)"
+              exit 0
+            fi
+            echo "Not yet matching; waiting for deployment"
+            sleep 15
+          done
+          echo "FAIL: Live Netlify HTML or portrait did not match the repository."
+          exit 1

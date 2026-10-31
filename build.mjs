@@ -3,6 +3,14 @@ import path from 'node:path';
 const out='dist'; fs.rmSync(out,{recursive:true,force:true}); fs.mkdirSync(out,{recursive:true});
 fs.copyFileSync('src/index.html',path.join(out,'index.html'));
 if(fs.existsSync('media')) fs.cpSync('media',path.join(out,'media'),{recursive:true});
+// Restore the uploaded Gaddar portrait from its text-safe source at build time.
+const gaddarSource='media/gaddar-enver.webp.b64';
+if(fs.existsSync(gaddarSource)){
+  const photo=Buffer.from(fs.readFileSync(gaddarSource,'utf8').trim(),'base64');
+  if(photo.length<1000||photo.toString('ascii',0,4)!=='RIFF'||photo.toString('ascii',8,12)!=='WEBP') throw new Error('Invalid Gaddar portrait');
+  fs.writeFileSync(path.join(out,'media','gaddar-enver.webp'),photo);
+}
+
 const read=(f,def=null)=>fs.existsSync(f)?JSON.parse(fs.readFileSync(f,'utf8')):def;
 const entries=(folder)=>fs.existsSync('content/'+folder)?fs.readdirSync('content/'+folder).filter(f=>f.endsWith('.json')).sort().map(f=>({path:'content/'+folder+'/'+f,data:read('content/'+folder+'/'+f)})):[];
 const cache=read('content/translations.tr.json',{entries:{}})?.entries||{};
@@ -13,7 +21,7 @@ function tr(file,field,en,legacy=''){
  if(c?.source && c.source!==en)return en;
  return legacy||en;
 }
-const works=entries('works').map(({path:file,data:w})=>{const en=w.description_en||w.description?.en||'';return {...w,description:{en,tr:tr(file,'description_en',en,w.description_tr||w.description?.tr||'')}}});
+const works=entries('works').map(({path:file,data:w})=>{const en=w.description_en||w.description?.en||'';return {...w,description:{en,tr:tr(file,'description_en',en,w.description_tr||w.description?.tr||'')}}}).sort((a,b)=>{const year=w=>w.year==='Upcoming'?2026:Number((w.year||'').match(/\d{4}/)?.[0]||0);return year(b)-year(a);});
 const gallery=entries('gallery').map(v=>v.data);
 const bio=read('content/bio.json',{});
 const site=read('content/site.json',{});

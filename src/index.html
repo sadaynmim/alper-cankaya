@@ -53,6 +53,16 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 @media(max-width:850px){.theme-toggle{width:42px;height:42px;padding:0}.theme-caption{display:none}}
 @media(max-width:560px){.theme-toggle{width:37px;height:39px;min-height:39px}.theme-symbol{font-size:18px}.header-actions{gap:6px}}
 
+
+/* Gallery album presentation */
+.gallery-grid{grid-auto-rows:245px}
+.album-viewer-heading{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;padding:20px 25px 12px}
+.album-viewer-heading strong{font:400 24px var(--display)}
+.album-viewer-heading small{font-size:11px;color:var(--muted)}
+.album-viewer-bar{display:flex;align-items:center;justify-content:center;gap:24px;padding:8px 20px 24px}
+.album-viewer-bar button{background:transparent;border:1px solid var(--line);border-radius:50%;width:44px;height:44px;color:inherit;font-size:24px;cursor:pointer}
+.album-viewer-bar span{font-size:12px;letter-spacing:.1em}
+@media(max-width:560px){.gallery-grid{grid-auto-rows:200px}.album-viewer-heading{padding:16px 15px 10px}.album-viewer-heading strong{font-size:20px}}
 </style>
 </head>
 <body>
@@ -154,7 +164,24 @@ function renderNews(){
   }).join('');
 }
 function renderWorks(){let filtered=works.filter(w=>workFilter==='all'||w.kind===workFilter);let shown=allWorks?filtered:filtered.slice(0,4);$('#worksGrid').innerHTML=shown.map(w=>`<article class="work-card" tabindex="0" role="button" data-work="${works.indexOf(w)}" aria-label="${escapeHtml(w.title)}"><div class="work-art" data-tone="${w.tone}"><div class="watermark" aria-hidden="true">A/C</div><span class="work-kind">${w.kind==='film'?tr('filterFilms'):w.kind==='theatre'?tr('filterTheatre'):tr('filterSeries')}</span>${w.character_image?`<img src="${escapeHtml(w.character_image)}" alt="${escapeHtml(w.role)}" loading="lazy" onerror="this.style.display='none'">`:""}<span class="work-title">${escapeHtml(w.title)}</span></div><div class="work-info"><div><b>${escapeHtml(w.role)}</b><p>${escapeHtml(w.year)}</p></div><span aria-hidden="true">↗</span></div></article>`).join('');$('#showWorks').style.display=filtered.length<=4?'none':'inline-flex';$('#showWorks span:first-child').textContent=allWorks?tr('showLess'):tr('showAll');}
-function renderGallery(){let arr=gallery.filter(g=>g&&g.src);$('#galleryGrid').innerHTML=arr.map((g,i)=>`<button class="gallery-card" type="button" data-photo="${i}" aria-label="${escapeHtml(tr('photo')+' '+(i+1))}"><div class="visual-fallback"><span>A/C</span></div><img src="${escapeHtml(g.src)}" alt="Alper Çankaya portrait archive ${i+1}" loading="lazy" onerror="this.style.display='none'"><div class="gallery-text"><div><small>0${i+1} / ${escapeHtml(tr('photo'))}</small><br><strong>${escapeHtml(tr('media'+g.cat))}</strong></div><span class="plus" aria-hidden="true">+</span></div></button>`).join('')}
+
+let galleryGroups=[];
+function renderGallery(){
+  const grouped=new Map();
+  gallery.filter(g=>g&&g.src).forEach((g,i)=>{
+    const key=g.album||('single-'+i);
+    if(!grouped.has(key))grouped.set(key,[]);
+    grouped.get(key).push(g);
+  });
+  galleryGroups=[...grouped.values()].sort((a,b)=>Number(Boolean(b[0].album))-Number(Boolean(a[0].album)));
+  $('#galleryGrid').innerHTML=galleryGroups.map((group,i)=>{
+    const g=group[0],album=group.length>1;
+    const title=album?(lang==='tr'?(g.album_title_tr||g.album_title_en):g.album_title_en):tr('media'+g.cat);
+    const info=album?(group.length+' '+(lang==='tr'?'fotoğraf':'photos')):(tr('photo')+' '+(i+1));
+    return '<button class="gallery-card" type="button" data-gallery-group="'+i+'" aria-label="'+escapeHtml(title)+'"><div class="visual-fallback"><span>A/C</span></div><img src="'+escapeHtml(g.src)+'" alt="'+escapeHtml(title)+'" loading="lazy" onerror="this.style.display=\'none\'"><div class="gallery-text"><div><small>'+escapeHtml(info)+'</small><br><strong>'+escapeHtml(title)+'</strong></div><span class="plus" aria-hidden="true">+</span></div></button>';
+  }).join('');
+}
+
 function render(){updateThemeLabel();document.documentElement.lang=lang;document.documentElement.dir='ltr';document.title='Alper Çankaya — The Archive';$$('[data-t]').forEach(e=>e.textContent=tr(e.dataset.t));$('#langButton').firstChild.textContent=lang.toUpperCase();$$('[data-lang]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.lang===lang)));renderWorks();renderGallery();renderNews();}
 let theme='editorial';
 try{let savedTheme=localStorage.getItem('aca_theme');if(savedTheme==='editorial'||savedTheme==='dark')theme=savedTheme}catch{}
@@ -177,7 +204,36 @@ function openModal(html){previousFocus=document.activeElement;$('#modalContent')
 function closeModal(){$('#modal').classList.remove('open');$('#modal').setAttribute('aria-hidden','true');document.body.style.overflow='';if(previousFocus?.isConnected)previousFocus.focus()}
 $('#modalClose').addEventListener('click',closeModal);$('#modal').addEventListener('click',e=>{if(e.target===$('#modal'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLangMenu()}if(e.key==='Tab'&&$('#modal').classList.contains('open')){let focusable=$$('#modal button, #modal a');let ix=focusable.indexOf(document.activeElement);if(e.shiftKey&&ix===0){e.preventDefault();focusable.at(-1).focus()}else if(!e.shiftKey&&ix===focusable.length-1){e.preventDefault();focusable[0].focus()}}});
 $('#worksGrid').addEventListener('click',e=>{let node=e.target.closest('[data-work]');if(!node)return;let w=works[+node.dataset.work];const picture=w.character_image?'<img class="modal-image" src="'+escapeHtml(w.character_image)+'" alt="'+escapeHtml(w.role)+'" loading="lazy">':'';const credit=w.character_image_credit?'<small class="photo-credit">'+(w.character_image_source&&/^https:\/\//.test(w.character_image_source)?'<a href="'+escapeHtml(w.character_image_source)+'" target="_blank" rel="noopener noreferrer">':'')+'Photo: '+escapeHtml(w.character_image_credit)+(w.character_image_source&&/^https:\/\//.test(w.character_image_source)?'</a>':'')+'</small>':'';openModal(picture+credit+`<div class="modal-work"><span class="mini">${escapeHtml(w.kind==='film'?tr('filterFilms'):w.kind==='theatre'?tr('filterTheatre'):tr('filterSeries'))} / ${escapeHtml(w.year)}</span><h3>${escapeHtml(w.title)}</h3><h4>${escapeHtml(tr('role'))}: ${escapeHtml(w.role)}</h4><p>${escapeHtml(w.description[lang])}</p><a class="inline-link" href="https://www.imdb.com/name/nm9842394/" target="_blank" rel="noopener noreferrer">IMDb ↗</a></div>`)});$('#worksGrid').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('[data-work]')){e.preventDefault();e.target.closest('[data-work]').click()}});
-$('#galleryGrid').addEventListener('click',e=>{let node=e.target.closest('[data-photo]');if(!node)return;let g=gallery[+node.dataset.photo];openModal(`<img class="modal-image" src="${escapeHtml(g.src)}" alt="Alper Çankaya archive photograph"><div class="modal-image-info"><span>${escapeHtml(tr('credit'))}: ${escapeHtml(g.credit)}</span><a class="inline-link" href="${escapeHtml(g.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr('source'))} ↗</a></div>`)});
+
+let activeGalleryGroup=-1,activeGalleryPhoto=0;
+function showGalleryPhoto(groupIndex,photoIndex,firstOpen){
+  const group=galleryGroups[groupIndex];
+  if(!group||!group.length)return;
+  const i=(photoIndex+group.length)%group.length,g=group[i];
+  activeGalleryGroup=groupIndex;activeGalleryPhoto=i;
+  const title=g.album?(lang==='tr'?(g.album_title_tr||g.album_title_en):g.album_title_en):tr('media'+g.cat);
+  const counter=(i+1)+' / '+group.length;
+  const place=g.place?' · '+escapeHtml(g.place):'';
+  const published=g.published?' · '+escapeHtml(g.published):'';
+  const source=g.url&&/^https:\/\//.test(g.url)?'<a class="inline-link" href="'+escapeHtml(g.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(tr('source'))+' ↗</a>':'';
+  const navigation=group.length>1?'<div class="album-viewer-bar"><button type="button" data-gallery-step="-1" aria-label="Previous photo">←</button><span>'+counter+'</span><button type="button" data-gallery-step="1" aria-label="Next photo">→</button></div>':'';
+  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div><img class="modal-image" src="'+escapeHtml(g.src)+'" alt="'+escapeHtml(title)+' — '+counter+'"><div class="modal-image-info"><span>'+escapeHtml(tr('credit'))+': '+escapeHtml(g.credit||'')+'</span>'+source+'</div>'+navigation;
+  if(firstOpen)openModal(html);else $('#modalContent').innerHTML=html;
+}
+$('#galleryGrid').addEventListener('click',e=>{
+  const node=e.target.closest('[data-gallery-group]');
+  if(node)showGalleryPhoto(Number(node.dataset.galleryGroup),0,true);
+});
+$('#modalContent').addEventListener('click',e=>{
+  const node=e.target.closest('[data-gallery-step]');
+  if(node&&activeGalleryGroup>=0)showGalleryPhoto(activeGalleryGroup,activeGalleryPhoto+Number(node.dataset.galleryStep),false);
+});
+document.addEventListener('keydown',e=>{
+  if(!$('#modal').classList.contains('open')||activeGalleryGroup<0)return;
+  if(e.key==='ArrowRight')showGalleryPhoto(activeGalleryGroup,activeGalleryPhoto+1,false);
+  if(e.key==='ArrowLeft')showGalleryPhoto(activeGalleryGroup,activeGalleryPhoto-1,false);
+});
+
 render();
 </script>
 </body>

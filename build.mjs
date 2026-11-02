@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 const out='dist'; fs.rmSync(out,{recursive:true,force:true}); fs.mkdirSync(out,{recursive:true});
 fs.copyFileSync('src/index.html',path.join(out,'index.html'));
+fs.copyFileSync('src/interviews.html',path.join(out,'interviews.html'));
 if(fs.existsSync('media')) fs.cpSync('media',path.join(out,'media'),{recursive:true});
 // Restore the uploaded Gaddar portrait from its text-safe source at build time.
 const gaddarSource='media/gaddar-enver.webp.b64';

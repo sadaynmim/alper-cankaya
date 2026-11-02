@@ -63,6 +63,9 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 .album-viewer-bar button{background:transparent;border:1px solid var(--line);border-radius:50%;width:44px;height:44px;color:inherit;font-size:24px;cursor:pointer}
 .album-viewer-bar span{font-size:12px;letter-spacing:.1em}
 @media(max-width:560px){.gallery-grid{grid-auto-rows:200px}.album-viewer-heading{padding:16px 15px 10px}.album-viewer-heading strong{font-size:20px}}
+
+/* Keep complete gallery photographs visible, without forced cropping or black bands. */
+.modal-image.gallery-photo{display:block;width:auto;max-width:100%;height:auto;max-height:min(72svh,800px);margin-inline:auto;object-fit:contain}
 </style>
 </head>
 <body>
@@ -217,7 +220,7 @@ function showGalleryPhoto(groupIndex,photoIndex,firstOpen){
   const published=g.published?' · '+escapeHtml(g.published):'';
   const source=g.url&&/^https:\/\//.test(g.url)?'<a class="inline-link" href="'+escapeHtml(g.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(tr('source'))+' ↗</a>':'';
   const navigation=group.length>1?'<div class="album-viewer-bar"><button type="button" data-gallery-step="-1" aria-label="Previous photo">←</button><span>'+counter+'</span><button type="button" data-gallery-step="1" aria-label="Next photo">→</button></div>':'';
-  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div><img class="modal-image" src="'+escapeHtml(g.src)+'" alt="'+escapeHtml(title)+' — '+counter+'"><div class="modal-image-info"><span>'+escapeHtml(tr('credit'))+': '+escapeHtml(g.credit||'')+'</span>'+source+'</div>'+navigation;
+  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div><img class="modal-image gallery-photo" src="'+escapeHtml(g.src)+'" alt="'+escapeHtml(title)+' — '+counter+'"><div class="modal-image-info"><span>'+escapeHtml(tr('credit'))+': '+escapeHtml(g.credit||'')+'</span>'+source+'</div>'+navigation;
   if(firstOpen)openModal(html);else $('#modalContent').innerHTML=html;
 }
 $('#galleryGrid').addEventListener('click',e=>{

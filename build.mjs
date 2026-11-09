@@ -33,4 +33,8 @@ const news=entries('news').map(({path:file,data:n})=>{for(const p of ['title','d
 const legacyNews=read('content/news.json',{});
 for(const p of ['title','description']){const en=legacyNews[p+'_en']||'';legacyNews[p+'_tr']=tr('content/news.json',p+'_en',en,legacyNews[p+'_tr']||'');}
 fs.writeFileSync(path.join(out,'archive-content.js'),'window.ARCHIVE_CONTENT='+JSON.stringify({works,gallery,bio,news,legacyNews,site}).replace(/</g,'\\u003c')+';');
+// Refresh cached content whenever the generated archive changes.
+const contentVersion=crypto.createHash('sha256').update(fs.readFileSync(path.join(out,'archive-content.js'))).digest('hex').slice(0,12);
+const homepage=path.join(out,'index.html');
+fs.writeFileSync(homepage,fs.readFileSync(homepage,'utf8').replace('src="archive-content.js"','src="archive-content.js?v='+contentVersion+'"'));
 console.log('Built '+works.length+' works, '+gallery.length+' photos, '+news.length+' articles. EN source / TR cache.');

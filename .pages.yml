@@ -50,6 +50,51 @@ content:
       - name: p2_en
         label: Paragraph 2 — English
         type: text
+      - name: p3_en
+        label: Paragraph 3 — English
+        type: text
+      - name: p4_en
+        label: Paragraph 4 — English
+        type: text
+      - name: p5_en
+        label: Paragraph 5 — English
+        type: text
+
+  - name: awards
+    label: Awards
+    type: collection
+    path: content/awards
+    format: json
+    filename: "{primary}.json"
+    fields:
+      - name: year
+        label: Year
+        type: string
+      - name: title_en
+        label: Award — English
+        type: string
+        required: true
+      - name: competition_en
+        label: Competition — English
+        type: string
+      - name: festival_en
+        label: Festival — English
+        type: string
+      - name: film
+        label: Original film title
+        type: string
+      - name: film_en
+        label: English film title
+        type: string
+      - name: director
+        label: Director
+        type: string
+      - name: source_url
+        label: Official source — English
+        type: string
+      - name: source_url_tr
+        label: Official source — Turkish
+        type: string
 
   - name: filmography
     label: Filmography

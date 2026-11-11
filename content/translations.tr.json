@@ -2,14 +2,24 @@
   "version": 1,
   "entries": {
     "content/bio.json:p1_en": {
-      "source": "Born in Tekirdağ on March 7, 1990, Alper Çankaya built his career across theatre, television and film, bringing distinct characters to life.",
-      "translation": "7 Mart 1990’da Tekirdağ’da doğan Alper Çankaya, tiyatro eğitiminin ardından sinema ve televizyon alanında farklı karakterlere hayat verdi.",
-      "origin": "reviewed-existing"
+      "source": "Born in Tekirdağ in 1990, Alper Çankaya grew up in Ankara, where he spent most of his education. He settled in Istanbul in 2021 and works across theatre, film and television.",
+      "translation": "1990’da Tekirdağ’da doğan Alper Çankaya, eğitim hayatının büyük bölümünü geçirdiği Ankara’da büyüdü. 2021’de İstanbul’a yerleşti; tiyatro, sinema ve televizyon alanlarında çalışmalarını sürdürüyor."
     },
     "content/bio.json:p2_en": {
-      "source": "He graduated from Bilkent University’s Theatre Department in 2017 and trained at the Shanghai Theatre Academy in 2016. His career spans stage performances and screen roles.",
-      "translation": "Bilkent Üniversitesi Tiyatro Bölümü’nden 2017’de mezun oldu. 2016’da Shanghai Theatre Academy’de eğitim aldı; sahne çalışmalarına ve kamera önündeki projelerine devam etti.",
-      "origin": "reviewed-existing"
+      "source": "He first studied economics. An invitation from a friend to try acting classes led him to change direction and enter theatre training. He graduated from Bilkent University’s Theatre Department in 2017; his studies also included a three-week summer programme in traditional Chinese opera at Shanghai Theatre Academy in 2016.",
+      "translation": "İlk olarak iktisat eğitimi aldı. Bir arkadaşının davetiyle katıldığı oyunculuk dersleri, yönünü tiyatroya çevirmesini sağladı. 2017’de Bilkent Üniversitesi Tiyatro Bölümü’nden mezun oldu. Eğitimi sırasında, 2016’da Shanghai Theatre Academy’de üç haftalık bir yaz programına katılarak geleneksel Çin operası üzerine çalıştı."
+    },
+    "content/bio.json:p3_en": {
+      "source": "With university classmates, he co-founded Sahne367 in Ankara. The company received the Direklerarası Audience Awards’ Promising Theatre distinction in 2019, an early recognition of their collective work.",
+      "translation": "Üniversiteden sınıf arkadaşlarıyla Ankara’da Sahne367’yi kurdu. Topluluk, 2019’da Direklerarası Seyircileri Umut Veren Tiyatro Ödülü’ne değer görüldü. Bu ödül, birlikte yürüttükleri tiyatro çalışmalarına verilen bir takdirdi."
+    },
+    "content/bio.json:p4_en": {
+      "source": "Music is part of his preparation: since his student years, he has built playlists to explore each character’s world. He is particularly drawn to roles that bring humour and dramatic depth into everyday stories.",
+      "translation": "Müzik, rol hazırlığının bir parçası. Öğrencilik yıllarından bu yana, karakterlerinin dünyasına yaklaşmak için çalma listeleri hazırlıyor. Özellikle mizahla dramatik derinliği bir araya getiren, gündelik hayatın içinden karakterlere ilgi duyuyor."
+    },
+    "content/bio.json:p5_en": {
+      "source": "His performance in Fikret Reyhan’s Cam Perde (Glass Curtain) earned him Best Actor in the National Competition of the 42nd Istanbul Film Festival in 2023.",
+      "translation": "Fikret Reyhan’ın yönettiği Cam Perde filmindeki performansıyla, 2023’te 42. İstanbul Film Festivali Ulusal Yarışma En İyi Erkek Oyuncu Ödülü’nü kazandı."
     },
     "content/news.json:title_en": {
       "source": "A new arrival on Sevdiğim Sensin: Ali Cabbar.",
@@ -106,6 +116,18 @@
     "content/news/netflix-10th-anniversary-2026.json:description_en": {
       "source": "Two portraits of Alper Çankaya from Netflix’s 10th anniversary celebration, wearing a black double-breasted suit and a burgundy tie.",
       "translation": "Netflix’in 10. yıl kutlamasından Alper Çankaya’nın iki portresi. Çankaya, geceye siyah kruvaze takım elbisesi ve bordo kravatıyla katıldı."
+    },
+    "content/awards/2023-istanbul.json:title_en": {
+      "source": "Best Actor",
+      "translation": "En İyi Erkek Oyuncu"
+    },
+    "content/awards/2023-istanbul.json:competition_en": {
+      "source": "National Competition",
+      "translation": "Ulusal Yarışma"
+    },
+    "content/awards/2023-istanbul.json:festival_en": {
+      "source": "42nd Istanbul Film Festival",
+      "translation": "42. İstanbul Film Festivali"
     }
   }
 }

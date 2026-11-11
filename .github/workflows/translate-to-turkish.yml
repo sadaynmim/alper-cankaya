@@ -9,6 +9,7 @@ on:
       - "content/news.json"
       - "content/news/**"
       - "content/works/**"
+      - "content/awards/**"
   workflow_dispatch:
 permissions:
   contents: write

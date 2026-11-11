@@ -28,11 +28,12 @@ const works=entries('works').map(({path:file,data:w})=>{const en=w.description_e
 const gallery=entries('gallery').map(v=>v.data);
 const bio=read('content/bio.json',{});
 const site=read('content/site.json',{});
-for(const p of ['p1','p2']){const en=bio[p+'_en']||'';bio[p+'_tr']=tr('content/bio.json',p+'_en',en,bio[p+'_tr']||'');}
+const awards=entries('awards').map(({path:file,data:a})=>{for(const field of ['title','competition','festival'])a[field+'_tr']=tr(file,field+'_en',a[field+'_en'],a[field+'_tr']||'');return a;}).sort((a,b)=>Number(b.year)-Number(a.year));
+for(const field of Object.keys(bio).filter(k=>/^p\d+_en$/.test(k))){const target=field.replace(/_en$/,'_tr');bio[target]=tr('content/bio.json',field,bio[field],bio[target]||'');}
 const news=entries('news').map(({path:file,data:n})=>{for(const p of ['title','description']){const en=n[p+'_en']||'';n[p+'_tr']=tr(file,p+'_en',en,n[p+'_tr']||'');}return n;});
 const legacyNews=read('content/news.json',{});
 for(const p of ['title','description']){const en=legacyNews[p+'_en']||'';legacyNews[p+'_tr']=tr('content/news.json',p+'_en',en,legacyNews[p+'_tr']||'');}
-fs.writeFileSync(path.join(out,'archive-content.js'),'window.ARCHIVE_CONTENT='+JSON.stringify({works,gallery,bio,news,legacyNews,site}).replace(/</g,'\\u003c')+';');
+fs.writeFileSync(path.join(out,'archive-content.js'),'window.ARCHIVE_CONTENT='+JSON.stringify({works,gallery,bio,awards,news,legacyNews,site}).replace(/</g,'\\u003c')+';');
 // Refresh cached content whenever the generated archive changes.
 const contentVersion=crypto.createHash('sha256').update(fs.readFileSync(path.join(out,'archive-content.js'))).digest('hex').slice(0,12);
 const homepage=path.join(out,'index.html');

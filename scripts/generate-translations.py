@@ -18,16 +18,19 @@ def load_json(path, default=None):
 
 def content_paths():
     paths = [ROOT / "content" / "bio.json", ROOT / "content" / "news.json"]
-    for folder in ("works", "news"):
+    for folder in ("works", "news", "awards"):
         paths.extend(sorted((ROOT / "content" / folder).glob("*.json")))
     return [p for p in paths if p.exists()]
 
 
 def fields_for(path):
     if path.name == "bio.json":
-        return ("p1_en", "p2_en")
+        data = load_json(path, {})
+        return sorted((key for key in data if re.fullmatch(r"p\d+_en", key)), key=lambda key: int(key[1:-3]))
     if path.parent.name == "works":
         return ("description_en",)
+    if path.parent.name == "awards":
+        return ("title_en", "competition_en", "festival_en")
     return ("title_en", "description_en")
 
 

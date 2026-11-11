@@ -12,6 +12,10 @@ must(Array.isArray(archive.works)&&archive.works.length>=8,'Filmography missing'
 must(Array.isArray(archive.news)&&archive.news.length>=1,'News missing');
 must(typeof archive.bio.p1_en==='string'&&archive.bio.p1_en.length>20,'Biography missing');
 must(typeof archive.bio.p1_tr==='string'&&archive.bio.p1_tr.length>20,'Turkish biography missing');
+const award=archive.awards?.find(a=>a.year==='2023'&&a.film==='Cam Perde');
+must(award?.title_en==='Best Actor'&&award.title_tr==='En İyi Erkek Oyuncu','Verified bilingual festival award missing');
+must(html.includes('id="awards"')&&html.includes('href="#awards"'),'Awards section or navigation missing');
+for(const locale of ['en','tr'])must(archive.bio['p4_'+locale]?.length>50&&archive.bio['p5_'+locale]?.length>50,'Expanded bilingual biography missing');
 must(archive.site.hero_image,'Homepage portrait missing');
 must(html.includes('id="heroPhoto"'),'Dynamic hero not present');
 must(html.includes('data-lang="tr"')&&html.includes('data-lang="en"'),'Language buttons missing');

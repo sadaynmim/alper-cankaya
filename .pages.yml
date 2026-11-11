@@ -213,7 +213,7 @@ content:
         type: text
 
   - name: videos
-    label: Gallery interviews
+    label: Interviews and programmes
     type: file
     path: content/videos.json
     format: json

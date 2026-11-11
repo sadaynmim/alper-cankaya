@@ -42,3 +42,8 @@ for(const chapter of archive.bio.chapters||[]){
 }
 must(covered.size===8,'Biography chapter missing');
 console.log('Validated award photograph, eight bilingual biography paragraphs and five unique source-linked interviews.');
+
+const photosSection=html.match(/<section id="gallery"[\s\S]*?<\/section>/)?.[0]||'';
+const interviewsSection=html.match(/<section id="interviews"[\s\S]*?<\/section>/)?.[0]||'';
+must(!photosSection.includes('interviewGrid')&&!photosSection.includes('galleryTabs'),'Interviews must not appear in the photo gallery');
+must(interviewsSection.includes('id="interviewGrid"')&&!interviewsSection.includes('video-tile'),'Interviews must appear in section 05');

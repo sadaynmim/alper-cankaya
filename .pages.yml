@@ -59,6 +59,15 @@ content:
       - name: p5_en
         label: Paragraph 5 — English
         type: text
+      - name: p6_en
+        label: Paragraph 6 — English
+        type: text
+      - name: p7_en
+        label: Paragraph 7 — English
+        type: text
+      - name: p8_en
+        label: Paragraph 8 — English
+        type: text
 
   - name: awards
     label: Awards
@@ -89,6 +98,21 @@ content:
       - name: director
         label: Director
         type: string
+      - name: image
+        label: Award ceremony photo
+        type: image
+      - name: image_credit
+        label: Photo credit
+        type: string
+      - name: image_source
+        label: Photo source URL
+        type: string
+      - name: image_caption_en
+        label: Photo caption — English
+        type: text
+      - name: image_caption_tr
+        label: Photo caption — Turkish
+        type: text
       - name: source_url
         label: Official source — English
         type: string
@@ -187,3 +211,30 @@ content:
       - name: description_en
         label: Article — English
         type: text
+
+  - name: videos
+    label: Gallery interviews
+    type: file
+    path: content/videos.json
+    format: json
+    fields:
+      - name: items
+        label: Videos
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: YouTube video ID
+            type: string
+          - name: title
+            label: Programme title
+            type: string
+          - name: channel
+            label: Original channel
+            type: string
+          - name: duration
+            label: Duration
+            type: string
+          - name: url
+            label: YouTube URL
+            type: string

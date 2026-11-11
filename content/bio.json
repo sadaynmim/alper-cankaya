@@ -1,17 +1,12 @@
 {
   "p1_fr": "Né le 7 mars 1990 à Tekirdağ, Alper Çankaya construit une carrière entre théâtre, télévision et cinéma.",
   "p2_fr": "Diplômé du département théâtre de l’université de Bilkent en 2017, il s’est également formé à la Shanghai Theatre Academy en 2016.",
-  "p1_en": "Born in Tekirdağ in 1990, Alper Çankaya grew up in Ankara, where he spent most of his education. He settled in Istanbul in 2021 and works across theatre, film and television.",
-  "p2_en": "He first studied economics. An invitation from a friend to try acting classes led him to change direction and enter theatre training. He graduated from Bilkent University’s Theatre Department in 2017; his studies also included a three-week summer programme in traditional Chinese opera at Shanghai Theatre Academy in 2016.",
-  "p1_tr": "1990’da Tekirdağ’da doğan Alper Çankaya, eğitim hayatının büyük bölümünü geçirdiği Ankara’da büyüdü. 2021’de İstanbul’a yerleşti; tiyatro, sinema ve televizyon alanlarında çalışmalarını sürdürüyor.",
-  "p2_tr": "İlk olarak iktisat eğitimi aldı. Bir arkadaşının davetiyle katıldığı oyunculuk dersleri, yönünü tiyatroya çevirmesini sağladı. 2017’de Bilkent Üniversitesi Tiyatro Bölümü’nden mezun oldu. Eğitimi sırasında, 2016’da Shanghai Theatre Academy’de üç haftalık bir yaz programına katılarak geleneksel Çin operası üzerine çalıştı.",
-  "p3_en": "With university classmates, he co-founded Sahne367 in Ankara. The company received the Direklerarası Audience Awards’ Promising Theatre distinction in 2019, an early recognition of their collective work.",
-  "p3_tr": "Üniversiteden sınıf arkadaşlarıyla Ankara’da Sahne367’yi kurdu. Topluluk, 2019’da Direklerarası Seyircileri Umut Veren Tiyatro Ödülü’ne değer görüldü. Bu ödül, birlikte yürüttükleri tiyatro çalışmalarına verilen bir takdirdi.",
-  "p4_en": "Music is part of his preparation: since his student years, he has built playlists to explore each character’s world. He is particularly drawn to roles that bring humour and dramatic depth into everyday stories.",
-  "p4_tr": "Müzik, rol hazırlığının bir parçası. Öğrencilik yıllarından bu yana, karakterlerinin dünyasına yaklaşmak için çalma listeleri hazırlıyor. Özellikle mizahla dramatik derinliği bir araya getiren, gündelik hayatın içinden karakterlere ilgi duyuyor.",
-  "p5_en": "His performance in Fikret Reyhan’s Cam Perde (Glass Curtain) earned him Best Actor in the National Competition of the 42nd Istanbul Film Festival in 2023.",
-  "p5_tr": "Fikret Reyhan’ın yönettiği Cam Perde filmindeki performansıyla, 2023’te 42. İstanbul Film Festivali Ulusal Yarışma En İyi Erkek Oyuncu Ödülü’nü kazandı.",
   "sources": [
+    {
+      "label_en": "Hürriyet · Hakan Gence interview",
+      "label_tr": "Hürriyet · Hakan Gence röportajı",
+      "url": "https://www.youtube.com/watch?v=U4NpYia1eus"
+    },
     {
       "label_en": "Socrates Club · 19 June 2025",
       "label_tr": "Socrates Club · 19 Haziran 2025",
@@ -26,6 +21,48 @@
       "label_en": "Career profile",
       "label_tr": "Eğitim ve kariyer",
       "url": "https://sinematiyatro.com/index.php/kim-kimdir/alper-cankaya"
+    }
+  ],
+  "p1_en": "Born in Tekirdağ in 1990, Alper Çankaya grew up in a family whose everyday life involved moving between cities. His father served in the military and his mother worked in healthcare. The eldest of two boys, he has a brother around eight and a half years younger than him.",
+  "p1_tr": "1990’da Tekirdağ’da doğan Alper Çankaya, farklı şehirlere taşınmanın günlük hayatın bir parçası olduğu bir ailede büyüdü. Babası asker, annesi sağlık çalışanıydı. Ailenin iki oğlundan büyüğü olan Çankaya’nın, kendisinden yaklaşık sekiz buçuk yaş küçük bir erkek kardeşi var.",
+  "p2_en": "His father’s postings meant that he attended primary school in three different cities. Leaving friends behind and finding his place in a new environment could be difficult, but he also remembers the excitement of discovering new places and meeting people. His family later settled in Ankara, the city where he spent much of his school life and developed his connection to theatre.",
+  "p2_tr": "Babasının görevi nedeniyle ilkokulu üç farklı şehirde okudu. Arkadaşlarından ayrılmak ve yeni bir çevrede kendine yer bulmak zaman zaman zor olsa da yeni yerler keşfetmenin ve insanlarla tanışmanın heyecanını da hatırlıyor. Ailesi daha sonra Ankara’ya yerleşti. Eğitim hayatının büyük bölümünü geçirdiği ve tiyatroyla bağını kurduğu bu şehir, yaşamında önemli bir yer tuttu.",
+  "p3_en": "As a child, he spent time playing outdoors in military housing estates, climbing fruit trees and playing football. Basketball became a particular passion: before acting entered his life, becoming a basketball player was one of his ambitions. He recalls being more interested in the court than in his schoolwork.",
+  "p3_tr": "Çocukluğundan aklında kalanlar arasında lojmanlarda açık havada oynamak, meyve ağaçlarına tırmanmak ve futbol var. Basketbol ise özel bir tutkuya dönüştü. Oyunculuk hayatına girmeden önce basketbolcu olmayı hayal ediyordu; okul yıllarında derslerden çok sahayla ilgilendiğini anlatıyor.",
+  "p4_en": "Acting was not a childhood plan. He initially enrolled in economics at Gazi University, but soon realised that the subject did not suit him. Those years were also a period of reading and watching films, through which his interests widened. A close friend attending acting classes in Ankara encouraged him to join; within months, he was preparing for conservatory entrance examinations.",
+  "p4_tr": "Oyunculuk, çocukluktan beri yaptığı bir plan değildi. Önce Gazi Üniversitesi’nde iktisat okumaya başladı, ancak bu alanın kendisine uygun olmadığını kısa sürede anladı. Bu yıllarda kitaplara ve filmlere daha fazla zaman ayırarak ilgi alanlarını genişletti. Ankara’da oyunculuk derslerine katılan yakın bir arkadaşının teşvikiyle derslere başladı; birkaç ay içinde konservatuvar sınavlarına hazırlanıyordu.",
+  "p5_en": "He changed direction and graduated from Bilkent University’s Theatre Department in 2017. His training brought him into contact with different approaches to acting and voice. In 2016, he also spent three weeks at Shanghai Theatre Academy studying traditional Chinese opera, an experience of precisely choreographed movement and a performance language very different from his own training.",
+  "p5_tr": "Yönünü değiştirerek girdiği Bilkent Üniversitesi Tiyatro Bölümü’nden 2017’de mezun oldu. Eğitimi boyunca farklı oyunculuk ve ses çalışmalarını tanıma fırsatı buldu. 2016’da Shanghai Theatre Academy’de geleneksel Çin operası üzerine üç haftalık bir programa da katıldı. Bu deneyim, ayrıntılı biçimde düzenlenmiş hareketlerle ve kendi eğitiminden oldukça farklı bir sahne diliyle çalışmasını sağladı.",
+  "p6_en": "With his university classmates, he co-founded Sahne367 in Ankara. The company received the Direklerarası Audience Awards’ Promising Theatre distinction in 2019. Theatre remained central to his understanding of acting as his screen career developed, and he moved to Istanbul in 2021.",
+  "p6_tr": "Üniversiteden sınıf arkadaşlarıyla Ankara’da Sahne367’yi kurdu. Topluluk, 2019’da Direklerarası Seyircileri Umut Veren Tiyatro Ödülü’ne değer görüldü. Ekran kariyeri gelişirken tiyatro, oyunculuğa bakışının merkezinde kalmayı sürdürdü. 2021’de İstanbul’a taşındı.",
+  "p7_en": "His performance in Fikret Reyhan’s Cam Perde (Glass Curtain) earned him Best Actor in the National Competition of the 42nd Istanbul Film Festival in 2023. Recalling the ceremony, he describes the award as an unexpected moment for which he had not prepared a speech. It marked an important recognition of his work in cinema.",
+  "p7_tr": "Fikret Reyhan’ın yönettiği Cam Perde filmindeki performansıyla, 2023’te 42. İstanbul Film Festivali Ulusal Yarışma En İyi Erkek Oyuncu Ödülü’nü kazandı. Töreni anlatırken, ödülü beklemediğini ve bir konuşma hazırlamadığını söylüyor. Bu başarı, sinemadaki çalışmalarının önemli bir takdiri oldu.",
+  "p8_en": "Music is part of his preparation: since his student years, he has created playlists to explore his characters’ worlds. He is drawn to stories that combine humour with dramatic depth. Away from his more severe screen characters, he describes himself as warm and funny; looking ahead, he hopes to make more films and return to the stage, spaces he values for the freedom and depth they offer an actor.",
+  "p8_tr": "Müzik, rol hazırlığının bir parçası. Öğrencilik yıllarından bu yana karakterlerinin dünyasına yaklaşmak için çalma listeleri hazırlıyor. Mizahla dramatik derinliği bir araya getiren hikâyelere ilgi duyuyor. Ekrandaki sert karakterlerinin aksine kendisini sıcakkanlı ve komik biri olarak anlatıyor. Geleceğe dair hayallerinde daha çok sinema filmi yapmak ve sahnede olmak var; bu alanların oyuncuya sunduğu özgürlüğü ve derinliği önemsiyor.",
+  "chapters": [
+    {
+      "from": 3,
+      "to": 3,
+      "title_en": "A childhood outdoors",
+      "title_tr": "Açık havada bir çocukluk"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "title_en": "Finding his way to theatre",
+      "title_tr": "Tiyatroya uzanan yol"
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "title_en": "From Ankara to the screen",
+      "title_tr": "Ankara’dan ekrana"
+    },
+    {
+      "from": 8,
+      "to": 8,
+      "title_en": "Inside the work",
+      "title_tr": "Oyunculuğa yaklaşımı"
     }
   ]
 }

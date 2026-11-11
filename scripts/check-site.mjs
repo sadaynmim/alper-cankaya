@@ -24,3 +24,21 @@ const title=archive.news.find(n=>n.title_en?.includes('APA Talks'));
 must(title&&title.title_tr?.includes('APA Talks'),'APA Talks localized news missing');
 for(const work of archive.works) must(work.description?.en&&work.description?.tr,'Missing localized character description');
 console.log('Validated HTML script, EN/TR localization, homepage configuration, filmography and APA Talks news.');
+
+const videoIds=new Set();
+for(const video of archive.videos||[]){
+ must(/^[\w-]{11}$/.test(video.id),'Invalid YouTube video ID');
+ must(!videoIds.has(video.id),'Duplicate gallery interview');videoIds.add(video.id);
+ must(video.url==='https://www.youtube.com/watch?v='+video.id&&video.channel,'Missing original interview source');
+}
+must(videoIds.has('U4NpYia1eus')&&videoIds.has('WVDOQHT7RJA')&&videoIds.size>=5,'Requested interviews missing from gallery');
+must(award.image&&fs.existsSync('dist/'+award.image)&&award.image_credit&&award.image_source,'Award ceremony photograph or credit missing');
+const covered=new Set([1,2]);
+for(const chapter of archive.bio.chapters||[]){
+ for(let i=chapter.from;i<=chapter.to;i++){
+  must(!covered.has(i),'Duplicate biography paragraph');covered.add(i);
+  for(const locale of ['en','tr'])must(archive.bio['p'+i+'_'+locale]?.length>50,'Missing biography chapter translation');
+ }
+}
+must(covered.size===8,'Biography chapter missing');
+console.log('Validated award photograph, eight bilingual biography paragraphs and five unique source-linked interviews.');

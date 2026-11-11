@@ -183,6 +183,9 @@ content:
       - name: cat
         label: Category
         type: number
+      - name: hidden
+        label: Hide photo from gallery
+        type: boolean
 
   - name: news
     label: News

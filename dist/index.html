@@ -86,6 +86,11 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 /* Professional enquiries are directed to the agency; the archive remains independent. */
 .agency-contact{padding:90px 0;border-top:1px solid var(--line)}.contact-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:start}.agency-contact h2{font:400 clamp(40px,4.8vw,68px)/1.1 var(--display);letter-spacing:-.04em;margin:18px 0 28px}.fan-site-notice{border-left:3px solid var(--accent);padding:3px 0 3px 20px;max-width:480px}.fan-site-notice strong{display:block;font-size:17px;line-height:1.5;margin-bottom:10px}.fan-site-notice p{color:var(--muted);line-height:1.8;margin:0;font-size:14px}.agency-card{border:1px solid var(--line);padding:35px}.agency-card h3{font:400 clamp(30px,3.5vw,48px)/1.2 var(--display);letter-spacing:-.03em;margin:15px 0 25px}.agency-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}.agency-email{display:inline-block;font-size:clamp(18px,2vw,27px);line-height:1.5;border-bottom:1px solid var(--fg);overflow-wrap:anywhere}.agency-help{font-size:13px;color:var(--muted);line-height:1.8;margin:20px 0 25px}.agency-website{font-size:11px;letter-spacing:.06em;text-transform:uppercase}.nav{gap:22px}
 @media(max-width:850px){.contact-layout{grid-template-columns:1fr;gap:35px}.agency-contact{padding:65px 0}.agency-card{padding:25px}.agency-contact h2{font-size:44px}}
+
+/* Named albums, with readable captions and an explicit action on every screen. */
+.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;gap:20px}.gallery-card{aspect-ratio:4/5;min-width:0}.gallery-card:nth-child(1){grid-row:auto}.gallery-card:nth-child(4){grid-column:auto}.gallery-card[hidden]{display:none}.gallery-card:after{background:linear-gradient(0deg,rgba(4,8,14,.96),rgba(4,8,14,.55) 35%,transparent 72%)}.gallery-card .gallery-text{display:flex;flex-direction:column;align-items:flex-start;gap:10px;inset:auto 22px 22px}.gallery-card small{color:#eef1f5;font-size:10px}.gallery-card strong{color:#fff;font-size:24px;line-height:1.25;overflow-wrap:anywhere}.gallery-open{color:#fff;font-size:11px;line-height:1.4;border-bottom:1px solid #ffffff80;padding-bottom:3px}.gallery-card:hover .gallery-open{text-decoration:underline}
+@media(max-width:850px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.gallery-grid{gap:12px;grid-template-rows:none;grid-auto-rows:auto}.gallery-card .gallery-text{inset:auto 12px 14px;gap:7px}.gallery-card strong{font-size:clamp(17px,4.5vw,22px)}.gallery-card small{font-size:9px;letter-spacing:.05em}.gallery-open{font-size:10px}}
 </style>
 </head>
 <body>
@@ -125,7 +130,7 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 </main>
 <footer class="footer dark-section"><div class="wrap"><div class="footer-top"><div class="footer-brand">Alper<br><span>Çankaya.</span></div><p class="footer-info" data-t="footerDesc"></p></div><div class="footer-bottom"><span>© 2026 ALPER ÇANKAYA — THE ARCHIVE. <span data-t="unofficial"></span></span><div class="source-links"><a href="https://www.imdb.com/name/nm9842394/" target="_blank" rel="noopener noreferrer">IMDb ↗</a><a href="https://www.sinematiyatro.com/kim-kimdir/alper-cankaya" target="_blank" rel="noopener noreferrer">Sinema & Tiyatro ↗</a></div></div></div></footer>
 <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Details"><div class="modal-shell"><button id="modalClose" type="button" class="modal-close" aria-label="Close">×</button><div id="modalContent"></div></div></div>
-<script src="archive-content.js?v=5b4d9c57c516"></script>
+<script src="archive-content.js?v=72a1b3783e99"></script>
 <script>
 const I18N={
 tr:{navHome:'Ana Sayfa',navAbout:'Biyografi',navWorks:'Filmografi',navGallery:'Galeri',navInterviews:'Röportajlar',navNews:'Haberler',heroEyebrow:'Bağımsız hayran arşivi',heroDesc:'Kameranın önünde ve sahnede. Alper Çankaya’nın oyunculuk yolculuğunu, unutulmaz karakterlerini ve kariyerini bir araya getiren bağımsız arşiv.',discover:'Filmografiyi keşfet',heroMeta1:'Kariyer arşivi',heroMeta2:'Fan edition',heroPhoto:'Bir oyuncunun hikâyesi',bioKicker:'01 / SANATÇI HAKKINDA',bioTitle:'Bir hikâyeden fazlası.',bioP1:'7 Mart 1990’da Tekirdağ’da doğan Alper Çankaya, tiyatro eğitiminin ardından sinema ve televizyon alanında farklı karakterlere hayat verdi.',bioP2:'Bilkent Üniversitesi Tiyatro Bölümü’nden 2017’de mezun oldu. 2016’da Shanghai Theatre Academy’de eğitim aldı; sahne çalışmalarına ve kamera önündeki projelerine devam etti.',factBorn:'Doğum',factBornVal:'7 Mart 1990 · Tekirdağ',factDiscipline:'Alan',factDisciplineVal:'Tiyatro · Sinema · TV',factTraining:'Eğitim',factBase:'Ülke',worksTitle:'Ekrandaki karakterleri.',worksSub:'Diziler, filmler ve kariyeri boyunca hayat verdiği karakterlerden seçkiler.',imdb:'IMDb filmografisi ↗',filterAll:'Tümü',filterSeries:'Diziler',filterFilms:'Filmler',filterTheatre:'Tiyatro',showAll:'Tüm yapımları gör',showLess:'Daha az göster',galleryTitle:'Kareler arasında.',gallerySub:'Portreler, röportajlar, set arkası ve kariyerinden görüntüler.',videosTitle:'Sahneler ve videolar.',videosSub:'Resmî yayıncı kanallardan seçilen sahneler ve video arşivi.',watchOfficial:'Resmî kanalda izle ↗',photo:'Fotoğraf',source:'Kaynak',newsTitle:'En son notlar.',newsSub:'Resmî duyurular ve kariyerinden seçilen haberler.',newsStoryTitle:'Sevdiğim Sensin’de yeni bir karakter: Ali Cabbar.',newsStoryDesc:'Star TV, 9 Eylül 2026 tarihinde Alper Çankaya’nın Ali Cabbar karakteriyle diziye katıldığını duyurdu.',readSource:'Resmî haberi oku ↗',footerDesc:'Alper Çankaya’nın sanat yaşamına adanmış, hayranlar tarafından hazırlanan bağımsız, çok dilli bir arşiv. Oyuncu veya temsilcileriyle bağlantılı değildir.',unofficial:'Resmî olmayan hayran sitesi.',role:'Karakter',year:'Yıl',type:'Tür',media0:'Portre',media1:'Editoryal',media2:'Fotoğraf çekimi',media3:'Kamera önü',credit:'Fotoğrafın kaynağı'},
@@ -144,12 +149,7 @@ let works=[
 {title:'Yargı',year:'2023',role:'Eyüp Böceli',kind:'series',tone:'midnight',description:{tr:'Eyüp Böceli karakteri.',en:'A television appearance as Eyüp Böceli.'}},
 {title:'Vatanım Sensin',year:'2018',role:'Arslan',kind:'series',tone:'steel',description:{tr:'Arslan karakteri.',en:'An early television role as Arslan.'}}
 ];
-let gallery=[
-{src:'https://cdn.sinemalar.com/images/list/1675/items/46109/1768135721.jpeg',credit:'Sinemalar.com',url:'https://www.sinemalar.com/liste/1675/basarili-oyuncu-alper-cankaya-ile-keyifli-bir-soylesi-yaptik',cat:0},
-{src:'https://yenikirobacom.teimg.com/crop/1280x720/yenikiroba-com/uploads/2026/05/alper-cankaya-2.jpg',credit:'Yeni Kıroba',url:'https://www.yenikiroba.com/uzak-sehirin-sahini-alper-cankaya-sok-kararla-veda-etti',cat:1},
-{src:'https://www.kimnerelidir.com/statik/uploads/2974/galeri_alper-cankaya_1.png',credit:'Kim Nerelidir',url:'https://www.kimnerelidir.com/kisi/2974/alper-cankaya.html',cat:2},
-{src:'https://cdn.ankaramasasi.com/2024/11/12/uzak-sehirin-sahini-alper-cankaya-kimdir-12112024-6-65ofotoq.webp',credit:'Ankara Masası',url:'https://www.ankaramasasi.com.tr/haber/2161506/uzak-sehir-in-sahini-alper-cankaya-kimdir-alper-cankaya-kac-yasinda',cat:3}
-];
+let gallery=[];
 // Data built from Pages CMS content files.
 if(window.ARCHIVE_CONTENT){
   const managed=window.ARCHIVE_CONTENT;
@@ -160,7 +160,7 @@ if(window.ARCHIVE_CONTENT){
     if(photo && cfg.hero_image) photo.src=cfg.hero_image;
     if(photo && cfg.hero_focus && ['15%','25%','35%','45%','50%','60%','70%'].includes(cfg.hero_focus)) photo.style.objectPosition='50% '+cfg.hero_focus;
   }
-  if(managed.gallery?.length) gallery=managed.gallery;
+  if(Array.isArray(managed.gallery)) gallery=managed.gallery.filter(g=>!g.hidden);
   if(managed.bio) for(const locale of ['en','tr']){
     if(managed.bio['p1_'+locale]) I18N[locale].bioP1=managed.bio['p1_'+locale];
     if(managed.bio['p2_'+locale]) I18N[locale].bioP2=managed.bio['p2_'+locale];
@@ -220,7 +220,7 @@ $('#interviewGrid').addEventListener('click',e=>{const n=e.target.closest('[data
 function renderGallery(){
   renderInterviewVideos();
   const grouped=new Map();
-  gallery.filter(g=>g&&g.src).forEach((g,i)=>{
+  gallery.filter(g=>g&&g.src&&!g.hidden).forEach((g,i)=>{
     const key=g.album||('single-'+i);
     if(!grouped.has(key))grouped.set(key,[]);
     grouped.get(key).push(g);
@@ -230,7 +230,8 @@ function renderGallery(){
     const g=group[0],album=group.length>1;
     const title=album?(lang==='tr'?(g.album_title_tr||g.album_title_en):g.album_title_en):tr('media'+g.cat);
     const info=album?(group.length+' '+(lang==='tr'?'fotoğraf':'photos')):(tr('photo')+' '+(i+1));
-    return '<button class="gallery-card" type="button" data-gallery-group="'+i+'" aria-label="'+escapeHtml(title)+'"><div class="visual-fallback"><span>A/C</span></div><img src="'+escapeHtml(g.cover||g.src)+'" alt="'+escapeHtml(title)+'" loading="lazy" onerror="this.style.display=\'none\'"><div class="gallery-text"><div><small>'+escapeHtml(info)+'</small><br><strong>'+escapeHtml(title)+'</strong></div><span class="plus" aria-hidden="true">+</span></div></button>';
+    const openLabel=lang==='tr'?'Albümü aç':'View album';
+    return '<button class="gallery-card" type="button" data-gallery-group="'+i+'" aria-label="'+escapeHtml(openLabel+' — '+title)+'"><img src="'+escapeHtml(g.cover||g.src)+'" alt="'+escapeHtml(title)+'" loading="lazy" onerror="this.closest(\'.gallery-card\').hidden=true"><div class="gallery-text"><small>'+escapeHtml(info)+'</small><strong>'+escapeHtml(title)+'</strong><span class="gallery-open">'+escapeHtml(openLabel)+' <span aria-hidden="true">↗</span></span></div></button>';
   }).join('');
 }
 

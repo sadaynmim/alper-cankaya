@@ -25,7 +25,7 @@ function tr(file,field,en,legacy=''){
  return legacy||en;
 }
 const works=entries('works').map(({path:file,data:w})=>{const en=w.description_en||w.description?.en||'';return {...w,description:{en,tr:tr(file,'description_en',en,w.description_tr||w.description?.tr||'')}}}).sort((a,b)=>{const year=w=>w.year==='Upcoming'?2026:Number((w.year||'').match(/\d{4}/)?.[0]||0);return year(b)-year(a);});
-const gallery=entries('gallery').map(v=>v.data);
+const gallery=entries('gallery').map(v=>v.data).filter(g=>!g.hidden);
 const videos=read('content/videos.json',{}).items||[];
 const bio=read('content/bio.json',{});
 const site=read('content/site.json',{});

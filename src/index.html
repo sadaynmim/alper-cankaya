@@ -68,6 +68,7 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 
 /* Keep complete gallery photographs visible, without forced cropping or black bands. */
 .modal-image.gallery-photo{display:block;width:auto;max-width:100%;height:auto;max-height:min(72svh,800px);margin-inline:auto;object-fit:contain}
+.modal-image.gallery-crop{width:min(100%,calc(min(72svh,800px) * var(--photo-ratio)));height:auto;max-height:none;aspect-ratio:var(--photo-ratio);overflow:hidden}
 .bio-sources{display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:25px}
 .bio-sources a{font-size:10px;letter-spacing:.04em;border-bottom:1px solid var(--line);padding-bottom:4px;color:var(--muted)}
 .award-entry{display:grid;grid-template-columns:180px minmax(0,1fr);gap:55px;align-items:center;border-block:1px solid var(--line);padding:45px 0}
@@ -259,6 +260,13 @@ $('#modalClose').addEventListener('click',closeModal);$('#modal').addEventListen
 $('#worksGrid').addEventListener('click',e=>{let node=e.target.closest('[data-work]');if(!node)return;let w=works[+node.dataset.work];const picture=w.character_image?'<img class="modal-image" src="'+escapeHtml(w.character_image)+'" alt="'+escapeHtml(w.role)+'" loading="lazy">':'';const credit=w.character_image_credit?'<small class="photo-credit">'+(w.character_image_source&&/^https:\/\//.test(w.character_image_source)?'<a href="'+escapeHtml(w.character_image_source)+'" target="_blank" rel="noopener noreferrer">':'')+'Photo: '+escapeHtml(w.character_image_credit)+(w.character_image_source&&/^https:\/\//.test(w.character_image_source)?'</a>':'')+'</small>':'';openModal(picture+credit+`<div class="modal-work"><span class="mini">${escapeHtml(w.kind==='film'?tr('filterFilms'):w.kind==='theatre'?tr('filterTheatre'):tr('filterSeries'))} / ${escapeHtml(w.year)}</span><h3>${escapeHtml(w.title)}</h3><h4>${escapeHtml(tr('role'))}: ${escapeHtml(w.role)}</h4><p>${escapeHtml(w.description[lang])}</p><a class="inline-link" href="https://www.imdb.com/name/nm9842394/" target="_blank" rel="noopener noreferrer">IMDb ↗</a></div>`)});$('#worksGrid').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('[data-work]')){e.preventDefault();e.target.closest('[data-work]').click()}});
 
 let activeGalleryGroup=-1,activeGalleryPhoto=0;
+function galleryPhotoMarkup(g,title,counter){
+  const label=escapeHtml(title+' — '+counter),c=g.crop;
+  if(c&&['x','y','width','height','source_width','source_height'].every(k=>Number.isFinite(c[k]))&&c.x>=0&&c.y>=0&&c.width>0&&c.height>0&&c.x+c.width<=c.source_width&&c.y+c.height<=c.source_height){
+    return '<svg class="modal-image gallery-photo gallery-crop" viewBox="'+[c.x,c.y,c.width,c.height].join(' ')+'" width="'+c.width+'" height="'+c.height+'" style="--photo-ratio:'+c.width/c.height+'" role="img" aria-label="'+label+'"><image href="'+escapeHtml(g.src)+'" width="'+c.source_width+'" height="'+c.source_height+'" aria-hidden="true"/></svg>';
+  }
+  return '<img class="modal-image gallery-photo" src="'+escapeHtml(g.src)+'" alt="'+label+'">';
+}
 function showGalleryPhoto(groupIndex,photoIndex,firstOpen){
   const group=galleryGroups[groupIndex];
   if(!group||!group.length)return;
@@ -271,7 +279,7 @@ function showGalleryPhoto(groupIndex,photoIndex,firstOpen){
   const source=g.url&&/^https:\/\//.test(g.url)?'<a class="inline-link" href="'+escapeHtml(g.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(tr('source'))+' ↗</a>':'';
   const navigation=group.length>1?'<div class="album-viewer-bar"><button type="button" data-gallery-step="-1" aria-label="Previous photo">←</button><span>'+counter+'</span><button type="button" data-gallery-step="1" aria-label="Next photo">→</button></div>':'';
   const credit=g.credit?'<span>'+escapeHtml(tr('credit'))+': '+escapeHtml(g.credit)+'</span>':'';
-  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div><img class="modal-image gallery-photo" src="'+escapeHtml(g.src)+'" alt="'+escapeHtml(title)+' — '+counter+'">'+(credit||source?'<div class="modal-image-info">'+credit+source+'</div>':'')+navigation;
+  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div>'+galleryPhotoMarkup(g,title,counter)+(credit||source?'<div class="modal-image-info">'+credit+source+'</div>':'')+navigation;
   if(firstOpen)openModal(html);else $('#modalContent').innerHTML=html;
 }
 $('#newsGrid').addEventListener('click',e=>{

@@ -1,0 +1,15 @@
+{
+  "src": "media/gallery/uzak-sehir-behind-scenes/41-car-selfie-bw.webp",
+  "cat": 3,
+  "album": "uzak-sehir-behind-scenes",
+  "album_title_en": "Uzak Şehir — Behind the scenes",
+  "album_title_tr": "Uzak Şehir — Kamera arkası",
+  "crop": {
+    "x": 63,
+    "y": 290,
+    "width": 1065,
+    "height": 1422,
+    "source_width": 1206,
+    "source_height": 1830
+  }
+}

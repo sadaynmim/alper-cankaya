@@ -1,0 +1,15 @@
+{
+  "src": "media/gallery/uzak-sehir-behind-scenes/48-cast-selfie.webp",
+  "cat": 3,
+  "album": "uzak-sehir-behind-scenes",
+  "album_title_en": "Uzak Şehir — Behind the scenes",
+  "album_title_tr": "Uzak Şehir — Kamera arkası",
+  "crop": {
+    "x": 68,
+    "y": 410,
+    "width": 1069,
+    "height": 1320,
+    "source_width": 1206,
+    "source_height": 1941
+  }
+}

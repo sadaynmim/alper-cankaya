@@ -68,6 +68,7 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 
 /* Keep complete gallery photographs visible, without forced cropping or black bands. */
 .modal-image.gallery-photo{display:block;width:auto;max-width:100%;height:auto;max-height:min(72svh,800px);margin-inline:auto;object-fit:contain}
+.modal-image.gallery-crop{width:min(100%,calc(min(72svh,800px) * var(--photo-ratio)));height:auto;max-height:none;aspect-ratio:var(--photo-ratio);overflow:hidden}
 .bio-sources{display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:25px}
 .bio-sources a{font-size:10px;letter-spacing:.04em;border-bottom:1px solid var(--line);padding-bottom:4px;color:var(--muted)}
 .award-entry{display:grid;grid-template-columns:180px minmax(0,1fr);gap:55px;align-items:center;border-block:1px solid var(--line);padding:45px 0}
@@ -130,7 +131,7 @@ body[data-theme="editorial"] .modal-work p{color:#b4bcc7}
 </main>
 <footer class="footer dark-section"><div class="wrap"><div class="footer-top"><div class="footer-brand">Alper<br><span>Çankaya.</span></div><p class="footer-info" data-t="footerDesc"></p></div><div class="footer-bottom"><span>© 2026 ALPER ÇANKAYA — THE ARCHIVE. <span data-t="unofficial"></span></span><div class="source-links"><a href="https://www.imdb.com/name/nm9842394/" target="_blank" rel="noopener noreferrer">IMDb ↗</a><a href="https://www.sinematiyatro.com/kim-kimdir/alper-cankaya" target="_blank" rel="noopener noreferrer">Sinema & Tiyatro ↗</a></div></div></div></footer>
 <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Details"><div class="modal-shell"><button id="modalClose" type="button" class="modal-close" aria-label="Close">×</button><div id="modalContent"></div></div></div>
-<script src="archive-content.js?v=73fe27570c4e"></script>
+<script src="archive-content.js?v=9135417cf8f7"></script>
 <script>
 const I18N={
 tr:{navHome:'Ana Sayfa',navAbout:'Biyografi',navWorks:'Filmografi',navGallery:'Galeri',navInterviews:'Röportajlar',navNews:'Haberler',heroEyebrow:'Bağımsız hayran arşivi',heroDesc:'Kameranın önünde ve sahnede. Alper Çankaya’nın oyunculuk yolculuğunu, unutulmaz karakterlerini ve kariyerini bir araya getiren bağımsız arşiv.',discover:'Filmografiyi keşfet',heroMeta1:'Kariyer arşivi',heroMeta2:'Fan edition',heroPhoto:'Bir oyuncunun hikâyesi',bioKicker:'01 / SANATÇI HAKKINDA',bioTitle:'Bir hikâyeden fazlası.',bioP1:'7 Mart 1990’da Tekirdağ’da doğan Alper Çankaya, tiyatro eğitiminin ardından sinema ve televizyon alanında farklı karakterlere hayat verdi.',bioP2:'Bilkent Üniversitesi Tiyatro Bölümü’nden 2017’de mezun oldu. 2016’da Shanghai Theatre Academy’de eğitim aldı; sahne çalışmalarına ve kamera önündeki projelerine devam etti.',factBorn:'Doğum',factBornVal:'7 Mart 1990 · Tekirdağ',factDiscipline:'Alan',factDisciplineVal:'Tiyatro · Sinema · TV',factTraining:'Eğitim',factBase:'Ülke',worksTitle:'Ekrandaki karakterleri.',worksSub:'Diziler, filmler ve kariyeri boyunca hayat verdiği karakterlerden seçkiler.',imdb:'IMDb filmografisi ↗',filterAll:'Tümü',filterSeries:'Diziler',filterFilms:'Filmler',filterTheatre:'Tiyatro',showAll:'Tüm yapımları gör',showLess:'Daha az göster',galleryTitle:'Kareler arasında.',gallerySub:'Portreler, röportajlar, set arkası ve kariyerinden görüntüler.',videosTitle:'Sahneler ve videolar.',videosSub:'Resmî yayıncı kanallardan seçilen sahneler ve video arşivi.',watchOfficial:'Resmî kanalda izle ↗',photo:'Fotoğraf',source:'Kaynak',newsTitle:'En son notlar.',newsSub:'Resmî duyurular ve kariyerinden seçilen haberler.',newsStoryTitle:'Sevdiğim Sensin’de yeni bir karakter: Ali Cabbar.',newsStoryDesc:'Star TV, 9 Eylül 2026 tarihinde Alper Çankaya’nın Ali Cabbar karakteriyle diziye katıldığını duyurdu.',readSource:'Resmî haberi oku ↗',footerDesc:'Alper Çankaya’nın sanat yaşamına adanmış, hayranlar tarafından hazırlanan bağımsız, çok dilli bir arşiv. Oyuncu veya temsilcileriyle bağlantılı değildir.',unofficial:'Resmî olmayan hayran sitesi.',role:'Karakter',year:'Yıl',type:'Tür',media0:'Portre',media1:'Editoryal',media2:'Fotoğraf çekimi',media3:'Kamera önü',credit:'Fotoğrafın kaynağı'},
@@ -259,6 +260,13 @@ $('#modalClose').addEventListener('click',closeModal);$('#modal').addEventListen
 $('#worksGrid').addEventListener('click',e=>{let node=e.target.closest('[data-work]');if(!node)return;let w=works[+node.dataset.work];const picture=w.character_image?'<img class="modal-image" src="'+escapeHtml(w.character_image)+'" alt="'+escapeHtml(w.role)+'" loading="lazy">':'';const credit=w.character_image_credit?'<small class="photo-credit">'+(w.character_image_source&&/^https:\/\//.test(w.character_image_source)?'<a href="'+escapeHtml(w.character_image_source)+'" target="_blank" rel="noopener noreferrer">':'')+'Photo: '+escapeHtml(w.character_image_credit)+(w.character_image_source&&/^https:\/\//.test(w.character_image_source)?'</a>':'')+'</small>':'';openModal(picture+credit+`<div class="modal-work"><span class="mini">${escapeHtml(w.kind==='film'?tr('filterFilms'):w.kind==='theatre'?tr('filterTheatre'):tr('filterSeries'))} / ${escapeHtml(w.year)}</span><h3>${escapeHtml(w.title)}</h3><h4>${escapeHtml(tr('role'))}: ${escapeHtml(w.role)}</h4><p>${escapeHtml(w.description[lang])}</p><a class="inline-link" href="https://www.imdb.com/name/nm9842394/" target="_blank" rel="noopener noreferrer">IMDb ↗</a></div>`)});$('#worksGrid').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('[data-work]')){e.preventDefault();e.target.closest('[data-work]').click()}});
 
 let activeGalleryGroup=-1,activeGalleryPhoto=0;
+function galleryPhotoMarkup(g,title,counter){
+  const label=escapeHtml(title+' — '+counter),c=g.crop;
+  if(c&&['x','y','width','height','source_width','source_height'].every(k=>Number.isFinite(c[k]))&&c.x>=0&&c.y>=0&&c.width>0&&c.height>0&&c.x+c.width<=c.source_width&&c.y+c.height<=c.source_height){
+    return '<svg class="modal-image gallery-photo gallery-crop" viewBox="'+[c.x,c.y,c.width,c.height].join(' ')+'" width="'+c.width+'" height="'+c.height+'" style="--photo-ratio:'+c.width/c.height+'" role="img" aria-label="'+label+'"><image href="'+escapeHtml(g.src)+'" width="'+c.source_width+'" height="'+c.source_height+'" aria-hidden="true"/></svg>';
+  }
+  return '<img class="modal-image gallery-photo" src="'+escapeHtml(g.src)+'" alt="'+label+'">';
+}
 function showGalleryPhoto(groupIndex,photoIndex,firstOpen){
   const group=galleryGroups[groupIndex];
   if(!group||!group.length)return;
@@ -271,7 +279,7 @@ function showGalleryPhoto(groupIndex,photoIndex,firstOpen){
   const source=g.url&&/^https:\/\//.test(g.url)?'<a class="inline-link" href="'+escapeHtml(g.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(tr('source'))+' ↗</a>':'';
   const navigation=group.length>1?'<div class="album-viewer-bar"><button type="button" data-gallery-step="-1" aria-label="Previous photo">←</button><span>'+counter+'</span><button type="button" data-gallery-step="1" aria-label="Next photo">→</button></div>':'';
   const credit=g.credit?'<span>'+escapeHtml(tr('credit'))+': '+escapeHtml(g.credit)+'</span>':'';
-  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div><img class="modal-image gallery-photo" src="'+escapeHtml(g.src)+'" alt="'+escapeHtml(title)+' — '+counter+'">'+(credit||source?'<div class="modal-image-info">'+credit+source+'</div>':'')+navigation;
+  const html='<div class="album-viewer-heading"><strong>'+escapeHtml(title)+'</strong><small>'+escapeHtml(g.year||'')+place+published+'</small></div>'+galleryPhotoMarkup(g,title,counter)+(credit||source?'<div class="modal-image-info">'+credit+source+'</div>':'')+navigation;
   if(firstOpen)openModal(html);else $('#modalContent').innerHTML=html;
 }
 $('#newsGrid').addEventListener('click',e=>{

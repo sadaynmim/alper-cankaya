@@ -1,0 +1,15 @@
+{
+  "src": "media/gallery/off-set/54-episode-evening.webp",
+  "cat": 3,
+  "album": "off-set",
+  "album_title_en": "Off set",
+  "album_title_tr": "Set dışında",
+  "crop": {
+    "x": 0,
+    "y": 529,
+    "width": 1179,
+    "height": 981,
+    "source_width": 1179,
+    "source_height": 1624
+  }
+}

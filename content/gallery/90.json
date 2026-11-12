@@ -1,0 +1,15 @@
+{
+  "src": "media/gallery/uzak-sehir-behind-scenes/52-visitor-selfie.webp",
+  "cat": 3,
+  "album": "uzak-sehir-behind-scenes",
+  "album_title_en": "Uzak Şehir — Behind the scenes",
+  "album_title_tr": "Uzak Şehir — Kamera arkası",
+  "crop": {
+    "x": 0,
+    "y": 305,
+    "width": 706,
+    "height": 785,
+    "source_width": 706,
+    "source_height": 1536
+  }
+}

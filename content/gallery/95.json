@@ -1,0 +1,15 @@
+{
+  "src": "media/gallery/uzak-sehir-behind-scenes/57-chair-break.webp",
+  "cat": 3,
+  "album": "uzak-sehir-behind-scenes",
+  "album_title_en": "Uzak Şehir — Behind the scenes",
+  "album_title_tr": "Uzak Şehir — Kamera arkası",
+  "crop": {
+    "x": 0,
+    "y": 0,
+    "width": 1206,
+    "height": 1640,
+    "source_width": 1206,
+    "source_height": 1991
+  }
+}

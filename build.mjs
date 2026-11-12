@@ -5,6 +5,14 @@ const out='dist'; fs.rmSync(out,{recursive:true,force:true}); fs.mkdirSync(out,{
 fs.copyFileSync('src/index.html',path.join(out,'index.html'));
 fs.copyFileSync('src/interviews.html',path.join(out,'interviews.html'));
 if(fs.existsSync('media')) fs.cpSync('media',path.join(out,'media'),{recursive:true});
+// Decode the supplied gallery photographs from text-safe repository sources.
+const gallerySource='media/gallery/uzak-sehir-behind-scenes';
+if(fs.existsSync(gallerySource)) for(const file of fs.readdirSync(gallerySource).filter(f=>f.endsWith('.jpeg.b64'))){
+ const photo=Buffer.from(fs.readFileSync(path.join(gallerySource,file),'utf8').trim(),'base64');
+ if(photo.length<1000||photo[0]!==0xff||photo[1]!==0xd8)throw new Error('Invalid gallery photograph: '+file);
+ fs.writeFileSync(path.join(out,gallerySource,file.slice(0,-4)),photo);
+ fs.rmSync(path.join(out,gallerySource,file));
+}
 // Restore the uploaded Gaddar portrait from its text-safe source at build time.
 const gaddarSource='media/gaddar-enver.webp.b64';
 if(fs.existsSync(gaddarSource)){
@@ -15,7 +23,7 @@ if(fs.existsSync(gaddarSource)){
 }
 
 const read=(f,def=null)=>fs.existsSync(f)?JSON.parse(fs.readFileSync(f,'utf8')):def;
-const entries=(folder)=>fs.existsSync('content/'+folder)?fs.readdirSync('content/'+folder).filter(f=>f.endsWith('.json')).sort().map(f=>({path:'content/'+folder+'/'+f,data:read('content/'+folder+'/'+f)})):[];
+const entries=(folder)=>fs.existsSync('content/'+folder)?fs.readdirSync('content/'+folder).filter(f=>f.endsWith('.json')).sort((a,b)=>a.localeCompare(b,'en',{numeric:true})).map(f=>({path:'content/'+folder+'/'+f,data:read('content/'+folder+'/'+f)})):[];
 const cache=read('content/translations.tr.json',{entries:{}})?.entries||{};
 function tr(file,field,en,legacy=''){
  if(!en)return legacy||'';
